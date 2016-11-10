@@ -6,7 +6,7 @@
 
 int main (void){
     
-    //Déclarations des variables
+    //Déclaration des variables
     
     int plateauDeJeu[TAILLE][TAILLE],quitter = 0,quitterPartie = 0,quitterMenu = 0;
     
