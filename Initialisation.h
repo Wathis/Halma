@@ -13,7 +13,7 @@ void positionnerLesPions(int plateau[TAILLE][TAILLE],int x,int y,int joueur);
 
 //Fonction qui affiche le tableau a un moment : t
 
-void afficherUnTableau(int tableau[TAILLE][TAILLE]);
+void afficherLePlateau(int tableau[TAILLE][TAILLE]);
 
 //Fonction qui initialise tout
 
