@@ -30,7 +30,7 @@ int main (void){
         //Initialisation du jeu
         
         joueur = 1; //Déclaré dans le initialisation.h
-        initialisation(plateauDeJeu,0,0,9,9,1,2);
+        initialisation(plateauDeJeu,0,9,0,9,1,2);
         /*initialiserTableau(plateauDeJeu);
         positionnerLesPions(plateauDeJeu,0,0,1);
         positionnerLesPions(plateauDeJeu,9,9,2);
