@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "Mouvements.h"
 #include "Initialisation.h"
+#include "Affichage.h"
+
 #define TAILLE 10
 
 int main (void){
@@ -12,44 +14,28 @@ int main (void){
     do { //Boucle principale du jeu
         
         do { //Boucle du menu
-            
-            //Effacer l'ecran
-            system("clear");
-    
-            printf("\t  ###############################################################\n");
-            printf("\t  #                                                             #\n");
-            printf("\t  #                       JEU DU HALMA                          #\n");
-            printf("\t  #                                                             #\n");
-            printf("\t  ###############################################################\n\n\n");
-            
+            afficherLeMessageDuMenu();
             nbDeJoueurs = 2;
             quitterMenu = 1;
-            
         } while (quitterMenu != 1);
         
         //Initialisation du jeu
-        joueur = 1; //Déclaré dans le initialisation.h
         initialisation(plateauDeJeu,0,9,0,9,1,2);
         
         do { //Boucle de la partie en cours
-            
-            
+        
             selectionnerUnPion(&xSelectionne,&ySelectionne,joueur);
             deplacerUnPion(xSelectionne,ySelectionne,plateauDeJeu);
-
+            
             if (joueur < nbDeJoueurs)
                 joueur++;
             else 
                 joueur = 1;
             
-        
         }while (quitterPartie != 1);
         
-        system("clear");
-        printf("Voulez-vous quitter le jeu ? ( 1 = Oui / 2 = Non ) ");
-        scanf("%d",&quitter);
         
-    }while (quitter != 1);
+    }while (demandeNouvellePartie());
     
     system("clear");
     return 0;

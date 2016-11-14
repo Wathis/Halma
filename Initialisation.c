@@ -41,20 +41,6 @@ void positionnerLesPions(int plateau[TAILLE][TAILLE],int x,int y,int joueur){ //
 
 }
 
-//Fonction qui affiche le tableau a un moment : t
-
-void afficherLePlateau(int plateau[TAILLE][TAILLE]){
-    system("clear");
-    printf("\n\t\t\t");
-    for (int i = 0 ; i < TAILLE ; i++){
-        for (int j = 0 ; j < TAILLE ; j++){
-            printf("%d   ",plateau[i][j]);
-        }
-        printf("\n\n\t\t\t");
-    }
-    printf("\n");
-}
-
 //Fonction qui initialise tout
 
 void initialisation(int plateau[TAILLE][TAILLE],int x1,int x2,int y1,int y2,int joueur1,int joueur2){
@@ -63,5 +49,5 @@ void initialisation(int plateau[TAILLE][TAILLE],int x1,int x2,int y1,int y2,int 
     positionnerLesPions(plateau,x1,y1,joueur1);
     positionnerLesPions(plateau,x2,y2,joueur2);
     afficherLePlateau(plateau);
-    
+    joueur = 1;
 }

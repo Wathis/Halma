@@ -1,6 +1,8 @@
 #define TAILLE 10
 #include <stdio.h>
 #include <stdlib.h>
+#include "Affichage.h"
+
 int joueur;
 
 //Fonction qui rempli le plateau de 0
