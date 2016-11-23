@@ -4,6 +4,7 @@
 
 void afficherLePlateau(int plateau[TAILLE][TAILLE]){
     system("clear");
+    //Ceci n'est qu'un test
     printf("\n\t\t\t");
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
