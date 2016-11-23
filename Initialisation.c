@@ -5,7 +5,7 @@
 
 //Fonction qui rempli le plateau de 0
 
-void initialiserTableau(int plateau[TAILLE][TAILLE]){
+void initialiserPlateau(int plateau[TAILLE][TAILLE]){
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
             plateau[i][j] = 0;
@@ -45,7 +45,7 @@ void positionnerLesPions(int plateau[TAILLE][TAILLE],int x,int y,int joueur){ //
 
 void initialisation(int plateau[TAILLE][TAILLE],int x1,int x2,int y1,int y2,int joueur1,int joueur2){
     
-    initialiserTableau(plateau);
+    initialiserPlateau(plateau);
     positionnerLesPions(plateau,x1,y1,joueur1);
     positionnerLesPions(plateau,x2,y2,joueur2);
     afficherLePlateau(plateau);

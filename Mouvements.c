@@ -39,30 +39,18 @@ int testDeCase(int plateau[TAILLE][TAILLE],int x,int y){
     }
 }
 
-int verificationDeDeplacement(int plateau[TAILLE][TAILLE],int xDepart,int yDepart,int xArrive,int yArrive){
-
-    double distanceEntreDeuxPions = sqrt(pow((xDepart - xArrive),2) + pow((yDepart - yArrive),2));
-    //Premiere vérification de déplacement simple
-    if (distanceEntreDeuxPions <= sqrt(2)){
-        return 1;
-    }
-    //Deuxieme vérification de saut
-    else if (distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2){
-        return 1;
-    }
-    else{
-        return 0;
-    }
-
-
-}
-
-//Fonction pour séléctionner un pion
-void selectionnerUnPion(int* xSelectionne,int* ySelectionne,int joueur){ //Coordonnées du pion séléctionné
-
-	printf("\n\t   Joueur %d (Selectionnez la coordonnée x de votre pion) :",joueur);
-    scanf("%d",xSelectionne);
-    printf("\n\t   Joueur %d (Selectionnez la coordonnée y de votre pion) :",joueur);
-    scanf("%d",ySelectionne);
+int verificationDeDeplacement(int plateau[TAILLE][TAILLE],int xSelectionne,int ySelectionne,int xDeplacement,int yDeplacement){
+    double distanceEntreDeuxPions = sqrt(pow((xSelectionne - xDeplacement),2) + pow((ySelectionne - yDeplacement),2));
+    //if (testDeCase(plateau,xArrive,yArrive)){
+        //Premiere vérification de déplacement simple
+        if (distanceEntreDeuxPions <= sqrt(2)){
+            return 1;
+        }
+        //Deuxieme vérification de saut
+        else if (distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2){
+            return 1;
+        }
+    //}
+    return 0;
 
 }

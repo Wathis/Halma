@@ -7,7 +7,7 @@ int joueur;
 
 //Fonction qui rempli le plateau de 0
 
-void initialiserTableau(int taille[TAILLE][TAILLE]);
+void initialiserPlateau(int plateau[TAILLE][TAILLE]);
 
 //Fonction qui positionne les joueurs
 
