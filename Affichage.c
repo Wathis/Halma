@@ -4,15 +4,28 @@
 
 void afficherLePlateau(int plateau[TAILLE][TAILLE]){
     system("clear");
-    //Ceci n'est qu'un test
-    printf("\n\t\t\t");
+    printf("\t\t      ");
+    for (int i = 1;i <= 10;i++){
+        printf("%d   ",i);
+    }
+    printf("\n\n\t\t      ");
+    for (int i = 1;i <= 10;i++){
+        printf("|   ");
+    }
+
+    printf("\n\n\t\t1  -  ");
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
             printf("%d   ",plateau[i][j]);
         }
-        printf("\n\n\t\t\t");
+        if (i < TAILLE - 1 && (i + 2) != 10){ //Pour éviter d'en avoir une en trop
+            printf("\n\n\t\t%d  -  ",i + 2);
+        }
+        else if ((i + 2) == 10) {
+            printf("\n\n\t       %d  -  ",i + 2);
+        }
     }
-    printf("\n");
+    printf("\n\n");
 }
 
 void afficherLeMessageDuMenu(){
