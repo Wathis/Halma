@@ -20,8 +20,8 @@ void positionnerLesPions(int plateau[TAILLE][TAILLE],int x,int y,int joueur){ //
     //Haut Gauche
     
     if ( x == 0 && y == 0){
-        for (int i = 0 ; i < 3 ; i++){
-            for (int j = 2 - i; j >= 0 ; j--){
+        for (int i = 0 ; i < 5 ; i++){
+            for (int j = 4 - i; j >= 0 ; j--){
                 plateau[i][j] = joueur;
             }
         }
@@ -31,7 +31,7 @@ void positionnerLesPions(int plateau[TAILLE][TAILLE],int x,int y,int joueur){ //
     
     if ( x == 9 && y == 9 ){
         int v = 0;
-        for (int i = 7 ; i <= 9 ; i++){
+        for (int i = 5 ; i <= 9 ; i++){
             for (int j = 9 - v; j <= 9 ; j++){
                 plateau[i][j] = joueur;
             }
