@@ -1,7 +1,5 @@
 #include "affichage.h"
 
-int joueur;
-
 //Fonction qui rempli le plateau de 0
 
 void initialiserPlateau(Plateau *plateau);

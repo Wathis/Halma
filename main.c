@@ -6,7 +6,7 @@ int main (void){
     //Déclarations des variables
     int quitter = 0,quitterPartie = 0,quitterMenu = 0,nbDeJoueurs;
     Plateau plateauDeJeu;
-    Case caseSelectionne,caseOriginJoueur1,caseOriginJoueur2;
+    Case caseOriginJoueur1,caseOriginJoueur2;
 
     //Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
 
@@ -22,9 +22,8 @@ int main (void){
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
         
         do { //Boucle de la partie en cours
-        
-            selectionnerUnPion(&caseSelectionne,joueur);
-            deplacerUnPion(&plateauDeJeu,&caseSelectionne);
+
+            deplacerUnPion(&plateauDeJeu);
             
             if (joueur < nbDeJoueurs)
                 joueur++;
