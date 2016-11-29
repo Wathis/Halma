@@ -7,7 +7,8 @@ int main (void){
     int quitter = 0,quitterPartie = 0,quitterMenu = 0,nbDeJoueurs;
     Plateau plateauDeJeu;
     Case caseSelectionne,caseOriginJoueur1,caseOriginJoueur2;
-//Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
+
+    //Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
 
     do { //Boucle principale du jeu
         
@@ -18,12 +19,12 @@ int main (void){
         } while (quitterMenu != 1);
         
         //Initialisation du jeu
-        initialisation(&plateauDeJeu,caseOriginJoueur1,caseOriginJoueur2,1,2);
+        initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
         
         do { //Boucle de la partie en cours
         
             selectionnerUnPion(&caseSelectionne,joueur);
-            deplacerUnPion(&plateauDeJeu,caseSelectionne);
+            deplacerUnPion(&plateauDeJeu,&caseSelectionne);
             
             if (joueur < nbDeJoueurs)
                 joueur++;

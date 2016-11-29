@@ -11,11 +11,11 @@ void initialiserPlateau(Plateau *plateau){
 
 //Fonction qui positionne les joueurs
 
-void positionnerLesPions(Plateau *plateau,Case origin,int joueur){ //Avec x et y points de départ du joueur
+void positionnerLesPions(Plateau *plateau,Case *origin,int joueur){ //Avec x et y points de départ du joueur
     
     //Haut Gauche
     
-    if ( origin.x == 0 && origin.y == 0){
+    if ( origin->x == 0 && origin->y == 0){
         for (int i = 0 ; i < 5 ; i++){
             for (int j = 4 - i; j >= 0 ; j--){
                 plateau->tab[i][j] = joueur;
@@ -25,7 +25,7 @@ void positionnerLesPions(Plateau *plateau,Case origin,int joueur){ //Avec x et y
     
     //Bas Droite
     
-    if ( origin.x == 9 && origin.y == 9 ){
+    if ( origin->x == 9 && origin->y == 9 ){
         int v = 0;
         for (int i = 5 ; i <= 9 ; i++){
             for (int j = 9 - v; j <= 9 ; j++){
@@ -39,8 +39,13 @@ void positionnerLesPions(Plateau *plateau,Case origin,int joueur){ //Avec x et y
 
 //Fonction qui initialise tout
 
-void initialisation(Plateau *plateau,Case originJoueur1,Case originJoueur2,int joueur1,int joueur2){
-    
+void initialisation(Plateau *plateau,Case *originJoueur1,Case *originJoueur2,int joueur1,int joueur2){
+
+    originJoueur1->x = 0;
+    originJoueur1->y = 0;
+    originJoueur2->x = 9;
+    originJoueur2->y = 9;
+
     initialiserPlateau(plateau);
     positionnerLesPions(plateau,originJoueur1,joueur1);
     positionnerLesPions(plateau,originJoueur2,joueur2);

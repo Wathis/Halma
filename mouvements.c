@@ -1,27 +1,24 @@
 #include "mouvements.h"
 
 //Fonction pour déplacer un pion
-int deplacerUnPion(Plateau *plateau,Case caseSelectionne){ //x et y sont les coordonnées où déplacer
+int deplacerUnPion(Plateau *plateau,Case *caseSelectionne){ //x et y sont les coordonnées où déplacer
 
 	//On récupère le joueur à déplacer
-	int joueur = plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1];
-    Case *caseDeplacement;
+	int joueur = plateau->tab[caseSelectionne->y - 1][caseSelectionne->x - 1];
+    Case caseDeplacement;
 
 	//Rafraichir l'écran de jeu
     system("clear");
     afficherLePlateau(plateau);
-
+    printf("%d",joueur);
 	//On lui demande les coordonées où il veut aller
-	printf("\n\t   Joueur %d (Selectionnez la coordonnée x où déplacer le pion) :",joueur);
-    scanf("%d",&(caseDeplacement->x));
-    printf("\n\t   Joueur %d (Selectionnez la coordonnée y où déplacer le pion) :",joueur);
-    scanf("%d",&(caseDeplacement->y));
+    selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
 
     //Ici il y aura la vérification 
-    if (verificationDeDeplacement(plateau,caseSelectionne,*caseDeplacement) == 1){
+    if (verificationDeDeplacement(plateau,*caseSelectionne,caseDeplacement) == 1){
         //On déplace le joueur 
-        plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
-        plateau->tab[caseDeplacement->y - 1][caseDeplacement->x - 1] = joueur;
+        plateau->tab[caseSelectionne->y - 1][caseSelectionne->x - 1] = 0;
+        plateau->tab[caseDeplacement.y - 1][caseDeplacement.x - 1] = joueur;
         afficherLePlateau(plateau);
     }else {
         afficherLePlateau(plateau);
