@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include "Initialisation.h"
-#include "Affichage.h"
-#include "Saisie.h"
+#include "saisie.h"
 
-
-int deplacerUnPion(int xSelectionne,int ySelectionne,int plateau[TAILLE][TAILLE]);
-int verificationDeDeplacement(int plateau[TAILLE][TAILLE],int xDepart,int yDepart,int xArrive,int yArrive);
-int testDeCase(int plateau[TAILLE][TAILLE],int x,int y);
-void selectionnerUnPion(int* xSelectionne,int* ySelectionne,int joueur);
+int deplacerUnPion(Plateau *plateau,Case caseSelectionne);
+int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement);
+int testDeCase(Plateau plateau,Case caseATester);

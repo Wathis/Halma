@@ -1,8 +1,7 @@
-#include "Affichage.h"
-
+#include "affichage.h"
 //Fonction qui affiche le tableau a un moment : t
 
-void afficherLePlateau(int plateau[TAILLE][TAILLE]){
+void afficherLePlateau(Plateau *plateau){
     system("clear");
     printf("\t\t      ");
     for (int i = 1;i <= 10;i++){
@@ -16,7 +15,7 @@ void afficherLePlateau(int plateau[TAILLE][TAILLE]){
     printf("\n\n\t\t1  -  ");
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
-            printf("%d   ",plateau[i][j]);
+            printf("%d   ",plateau->tab[i][j]);
         }
         if (i < TAILLE - 1 && (i + 2) != 10){ //Pour éviter d'en avoir une en trop
             printf("\n\n\t\t%d  -  ",i + 2);

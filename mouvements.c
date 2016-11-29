@@ -1,10 +1,11 @@
-#include "Mouvements.h"
+#include "mouvements.h"
 
 //Fonction pour déplacer un pion
-int deplacerUnPion(int xSelectionne,int ySelectionne,int plateau[TAILLE][TAILLE]){ //x et y sont les coordonnées où déplacer
+int deplacerUnPion(Plateau *plateau,Case caseSelectionne){ //x et y sont les coordonnées où déplacer
 
 	//On récupère le joueur à déplacer
-	int joueur = plateau[ySelectionne - 1][xSelectionne - 1],xDeplacement,yDeplacement;
+	int joueur = plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1];
+    Case *caseDeplacement;
 
 	//Rafraichir l'écran de jeu
     system("clear");
@@ -12,15 +13,15 @@ int deplacerUnPion(int xSelectionne,int ySelectionne,int plateau[TAILLE][TAILLE]
 
 	//On lui demande les coordonées où il veut aller
 	printf("\n\t   Joueur %d (Selectionnez la coordonnée x où déplacer le pion) :",joueur);
-    scanf("%d",&xDeplacement);
+    scanf("%d",&(caseDeplacement->x));
     printf("\n\t   Joueur %d (Selectionnez la coordonnée y où déplacer le pion) :",joueur);
-    scanf("%d",&yDeplacement);
+    scanf("%d",&(caseDeplacement->y));
 
     //Ici il y aura la vérification 
-    if (verificationDeDeplacement(plateau,xSelectionne,ySelectionne,xDeplacement,yDeplacement) == 1){
+    if (verificationDeDeplacement(plateau,caseSelectionne,*caseDeplacement) == 1){
         //On déplace le joueur 
-        plateau[ySelectionne - 1][xSelectionne - 1] = 0;
-        plateau[yDeplacement - 1][xDeplacement - 1] = joueur;
+        plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
+        plateau->tab[caseDeplacement->y - 1][caseDeplacement->x - 1] = joueur;
         afficherLePlateau(plateau);
     }else {
         afficherLePlateau(plateau);
@@ -30,8 +31,8 @@ int deplacerUnPion(int xSelectionne,int ySelectionne,int plateau[TAILLE][TAILLE]
 }
 
 //Fonction qui renvoi 1 si la case est prise, et 0 si elle n'est pas prise
-int testDeCase(int plateau[TAILLE][TAILLE],int x,int y){
-    if (plateau[y][x] != 0){
+int testDeCase(Plateau plateau,Case caseATester){
+    if (plateau.tab[caseATester.y][caseATester.y] != 0){
         return 1;
     }
     else {
@@ -39,8 +40,8 @@ int testDeCase(int plateau[TAILLE][TAILLE],int x,int y){
     }
 }
 
-int verificationDeDeplacement(int plateau[TAILLE][TAILLE],int xSelectionne,int ySelectionne,int xDeplacement,int yDeplacement){
-    double distanceEntreDeuxPions = sqrt(pow((xSelectionne - xDeplacement),2) + pow((ySelectionne - yDeplacement),2));
+int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement){
+    double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
     //if (testDeCase(plateau,xArrive,yArrive)){
         //Premiere vérification de déplacement simple
         if (distanceEntreDeuxPions <= sqrt(2)){

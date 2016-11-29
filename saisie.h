@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "initialisation.h"
 
 int demandeNouvellePartie();
-void selectionnerUnPion(int* xSelectionne,int* ySelectionne,int joueur);
+void selectionnerUnPion(Case *caseSelectionne,int joueur);

@@ -1,16 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "Mouvements.h"
-#include "Initialisation.h"
-#include "Affichage.h"
-
+#include "mouvements.h"
 #define TAILLE 10
 
 int main (void){
 
     //Déclarations des variables
-    int plateauDeJeu[TAILLE][TAILLE],quitter = 0,quitterPartie = 0,quitterMenu = 0,xSelectionne,ySelectionne,nbDeJoueurs;
-    
+    int quitter = 0,quitterPartie = 0,quitterMenu = 0,nbDeJoueurs;
+    Plateau plateauDeJeu;
+    Case caseSelectionne,caseOriginJoueur1,caseOriginJoueur2;
+//Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
+
     do { //Boucle principale du jeu
         
         do { //Boucle du menu
@@ -20,12 +18,12 @@ int main (void){
         } while (quitterMenu != 1);
         
         //Initialisation du jeu
-        initialisation(plateauDeJeu,0,9,0,9,1,2);
+        initialisation(&plateauDeJeu,caseOriginJoueur1,caseOriginJoueur2,1,2);
         
         do { //Boucle de la partie en cours
         
-            selectionnerUnPion(&xSelectionne,&ySelectionne,joueur);
-            deplacerUnPion(xSelectionne,ySelectionne,plateauDeJeu);
+            selectionnerUnPion(&caseSelectionne,joueur);
+            deplacerUnPion(&plateauDeJeu,caseSelectionne);
             
             if (joueur < nbDeJoueurs)
                 joueur++;

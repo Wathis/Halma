@@ -1,4 +1,4 @@
-#include "Saisie.h"
+#include "saisie.h"
 
 //Fonction qui demande si les utilisateurs veulent refaire une partie
 int demandeNouvellePartie(){
@@ -14,11 +14,11 @@ int demandeNouvellePartie(){
 }
 
 //Fonction pour séléctionner un pion
-void selectionnerUnPion(int* xSelectionne,int* ySelectionne,int joueur){ //Coordonnées du pion séléctionné
+void selectionnerUnPion(Case *caseSelectionne,int joueur){ //Coordonnées du pion séléctionné
 
 	printf("\n\t   Joueur %d (Selectionnez la coordonnée x de votre pion) :",joueur);
-    scanf("%d",xSelectionne);
+    scanf("%d",&(caseSelectionne->x));
     printf("\n\t   Joueur %d (Selectionnez la coordonnée y de votre pion) :",joueur);
-    scanf("%d",ySelectionne);
+    scanf("%d",&(caseSelectionne->y));
 
 }
