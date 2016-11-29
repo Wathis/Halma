@@ -1,11 +1,15 @@
 #include "mouvements.h"
 
 //Fonction pour déplacer un pion
-int deplacerUnPion(Plateau *plateau,Case *caseSelectionne){ //x et y sont les coordonnées où déplacer
+int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplacer
+    
+    //On récupère le joueur à déplacer
+    extern int joueur;
+    Case caseSelectionne,caseDeplacement;
 
-	//On récupère le joueur à déplacer
-	int joueur = plateau->tab[caseSelectionne->y - 1][caseSelectionne->x - 1];
-    Case caseDeplacement;
+    do {
+        selectionnerUnPion(&caseSelectionne,joueur);
+    }while (verificationDeSelection(plateau,&caseSelectionne,joueur));
 
 	//Rafraichir l'écran de jeu
     system("clear");
@@ -14,9 +18,9 @@ int deplacerUnPion(Plateau *plateau,Case *caseSelectionne){ //x et y sont les co
     selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
 
     //Ici il y aura la vérification 
-    if (verificationDeDeplacement(plateau,*caseSelectionne,caseDeplacement) == 1){
+    if (verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement) == 1){
         //On déplace le joueur 
-        plateau->tab[caseSelectionne->y - 1][caseSelectionne->x - 1] = 0;
+        plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
         plateau->tab[caseDeplacement.y - 1][caseDeplacement.x - 1] = joueur;
         afficherLePlateau(plateau);
     }else {
@@ -26,9 +30,21 @@ int deplacerUnPion(Plateau *plateau,Case *caseSelectionne){ //x et y sont les co
     return 0;
 }
 
+int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
+    if (plateau->tab[caseATester->y - 1][caseATester->x - 1] != joueur){
+        afficherLePlateau(plateau);
+        erreur("\tVous avez fait une mauvaise sélection, ce pion ne vous appartient pas");
+        return 1;
+    }
+    return 0;
+}
+
 //Fonction qui renvoi 1 si la case est prise, et 0 si elle n'est pas prise
 int testDeCase(Plateau *plateau,Case *caseATester){
     if (plateau->tab[caseATester->y - 1][caseATester->x - 1] != 0){
+        return 0;
+    }
+    else if (caseATester->x > 10 || caseATester->y > 10 || caseATester->x < 1 || caseATester->y < 1){
         return 0;
     }
     else {

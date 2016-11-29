@@ -7,6 +7,8 @@ typedef struct Joueur Joueur;
 typedef struct Plateau Plateau;
 typedef struct Case Case;
 
+int joueur; //Joueur est une variable globale car nous en avons besoin partout et c'est la même pour tous fichiers
+
 struct Joueur{
     char nom[30];
     int chiffre;

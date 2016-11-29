@@ -26,9 +26,9 @@ void selectionnerUnPion(Case *caseSelectionne,int joueur){ //Coordonnées du pio
 //Fonction pour séléctonner une case pour le déplacement
 void selectionnerUneCaseDeplacement(Case *caseSelectionne,int joueur){ //Coordonnées du pion séléctionné
 
-    printf("\n\t   Joueur %d (Selectionnez la coordonnée x de votre pion) :",joueur);
+    printf("\n\t   Joueur %d (Selectionnez la coordonnée x de la case de déstination) :",joueur);
     scanf("%d",&(caseSelectionne->x));
-    printf("\n\t   Joueur %d (Selectionnez la coordonnée y de votre pion) :",joueur);
+    printf("\n\t   Joueur %d (Selectionnez la coordonnée y de la case de déstination) :",joueur);
     scanf("%d",&(caseSelectionne->y));
 
 }
