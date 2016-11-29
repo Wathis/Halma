@@ -10,7 +10,6 @@ int deplacerUnPion(Plateau *plateau,Case *caseSelectionne){ //x et y sont les co
 	//Rafraichir l'écran de jeu
     system("clear");
     afficherLePlateau(plateau);
-    printf("%d",joueur);
 	//On lui demande les coordonées où il veut aller
     selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
 
