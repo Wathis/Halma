@@ -5,6 +5,7 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
     
     //On récupère le joueur à déplacer
     extern int joueur;
+    int verification = 1;
     Case caseSelectionne,caseDeplacement;
 
     do {
@@ -17,9 +18,9 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
     do {
         //On lui demande les coordonées où il veut aller
         selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
-
+        verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement);
         //Ici il y aura la vérification 
-        if (verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement) == 1){
+        if (verification){
             //On déplace le joueur 
             plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
             plateau->tab[caseDeplacement.y - 1][caseDeplacement.x - 1] = joueur;
@@ -28,7 +29,7 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
             afficherLePlateau(plateau);
             erreur("\t   Vous n'avez pas le droit de faire ce déplacement");
         }
-    }while(!(verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement)));
+    }while(!(verification));
 
     return 0;
 }
@@ -60,12 +61,10 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
     if (testDeCase(plateau,&caseDeplacement)){
         //Premiere vérification de déplacement simple
         if (distanceEntreDeuxPions <= sqrt(2)){
-            printf("OK");
             return 1;
         }
         //Deuxieme vérification de saut
         else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
-            printf("OK");
             return 1;
         }
     }
