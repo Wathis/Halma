@@ -65,13 +65,14 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
         }
         //Deuxieme vérification de saut
         else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
-	    Case caseSaute;
-    	    caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
-	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;	    
-            if(plateau->tab[caseSaute.y][caseSaute.x]  == 1 || plateau->tab[caseSaute.y][caseSaute.x] == 2)
-	    { 
-	 	    return 1;
-	    }
+    	    Case caseSaute;
+        	caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
+    	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;
+            printf("%d %d",caseSaute.x,caseSaute.y);	    
+            if(plateau->tab[caseSaute.y - 1][caseSaute.x- 1]  == 1 || plateau->tab[caseSaute.y - 1][caseSaute.x - 1] == 2)
+    	    {
+    	 	    return 1;
+    	    }
         }
     }
     return 0;
