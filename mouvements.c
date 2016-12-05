@@ -64,7 +64,7 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
 	    Case caseSaute;
     	    caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
 	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;	    
-            if(plateau->tab[caseSaute.x][caseSaute.y] == joueur)
+            if(plateau->tab[caseSaute.y][caseSaute.x]  == 1 || plateau->tab[caseSaute.y][caseSaute.x] == 2)
 	    { 
 	 	    return 1;
 	    }
