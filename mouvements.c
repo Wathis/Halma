@@ -5,28 +5,32 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
     
     //On récupère le joueur à déplacer
     extern int joueur;
+    int verification = 1;
     Case caseSelectionne,caseDeplacement;
 
     do {
         selectionnerUnPion(&caseSelectionne,joueur);
     }while (verificationDeSelection(plateau,&caseSelectionne,joueur));
 
-	//Rafraichir l'écran de jeu
-    system("clear");
+    //Rafraichir l'écran de jeu
     afficherLePlateau(plateau);
-	//On lui demande les coordonées où il veut aller
-    selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
 
-    //Ici il y aura la vérification 
-    if (verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement) == 1){
-        //On déplace le joueur 
-        plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
-        plateau->tab[caseDeplacement.y - 1][caseDeplacement.x - 1] = joueur;
-        afficherLePlateau(plateau);
-    }else {
-        afficherLePlateau(plateau);
-        erreur("\t   Vous n'avez pas le droit de faire ce déplacement");
-    }
+    do {
+        //On lui demande les coordonées où il veut aller
+        selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
+        verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement);
+        //Ici il y aura la vérification 
+        if (verification){
+            //On déplace le joueur 
+            plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
+            plateau->tab[caseDeplacement.y - 1][caseDeplacement.x - 1] = joueur;
+            afficherLePlateau(plateau);
+        }else {
+            afficherLePlateau(plateau);
+            erreur("\t   Vous n'avez pas le droit de faire ce déplacement");
+        }
+    }while(!(verification));
+
     return 0;
 }
 
