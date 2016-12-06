@@ -8,17 +8,23 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
     int verification = 1;
     Case caseSelectionne,caseDeplacement;
 
-    do {
-        selectionnerUnPion(&caseSelectionne,joueur);
-    }while (verificationDeSelection(plateau,&caseSelectionne,joueur));
-
-    //Rafraichir l'écran de jeu
-    afficherLePlateau(plateau);
+    //Boucle de séléction principale ( Pour éviter que l'utilisateur se trompe ou donne une mauvaise case)
 
     do {
+
+        //Boucle de séléction d'un pion
+        do {
+            selectionnerUnPion(&caseSelectionne,joueur);
+        }while (verificationDeSelection(plateau,&caseSelectionne,joueur));
+
+        //Rafraichir l'écran de jeu
+        afficherLePlateau(plateau);
+
         //On lui demande les coordonées où il veut aller
         selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
+        //On associe a verification la valeur retournée de verification ( Utilie car on modifie plateau->tab après)
         verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement);
+        
         //Ici il y aura la vérification 
         if (verification){
             //On déplace le joueur 
@@ -29,6 +35,7 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
             afficherLePlateau(plateau);
             erreur("\t   Vous n'avez pas le droit de faire ce déplacement");
         }
+
     }while(!(verification));
 
     return 0;
