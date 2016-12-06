@@ -45,7 +45,7 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
 
     return 0;
 }
-
+/*
 int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
     if (plateau->tab[caseATester->y - 1][caseATester->x - 1] != joueur){
         afficherLePlateau(plateau);
@@ -79,7 +79,8 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
         else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
     	    Case caseSaute;
         	caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
-    	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;	    
+    	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;
+            printf("%d %d",caseSaute.x,caseSaute.y);	    
             if(plateau->tab[caseSaute.y - 1][caseSaute.x- 1]  == 1 || plateau->tab[caseSaute.y - 1][caseSaute.x - 1] == 2)
     	    {
     	 	    return 1;
@@ -88,4 +89,4 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
     }
     return 0;
 
-}
+}*/
