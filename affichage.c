@@ -2,28 +2,50 @@
 //Fonction qui affiche le tableau a un moment : t
 
 void afficherLePlateau(Plateau *plateau){
+    extern int joueur;
     system("clear");
     printf("\t\t      ");
     for (int i = 1;i <= 10;i++){
-        printf("%d   ",i);
+        printf(COLOR_JAUNE "%d   " COLOR_RESET,i);
     }
     printf("\n\n\t\t      ");
     for (int i = 1;i <= 10;i++){
-        printf("|   ");
+
+        printf(COLOR_JAUNE "|   " COLOR_RESET);
     }
 
-    printf("\n\n\t\t1  -  ");
+    printf(COLOR_JAUNE "\n\n\t\t1  -  " COLOR_RESET);
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
-            printf("%d   ",plateau->tab[i][j]);
+            switch (plateau->tab[i][j]) {
+                case 0: 
+                    printf(COLOR_BLANC "%d   " COLOR_RESET,plateau->tab[i][j]);
+                    break;
+                case 1: 
+                    printf(COLOR_CYAN "%d   " COLOR_RESET,plateau->tab[i][j]);
+                    break;
+                case 2: 
+                    printf(COLOR_ROUGE "%d   " COLOR_RESET,plateau->tab[i][j]);
+                    break;
+                case -1: //Cas où il faut faire clignoter le joueur 1 sélectionné (Noté en -1 dans la matrice)
+                    printf(COLOR_CYAN FAIRE_CLIGNOTER "%d   "  COLOR_RESET,joueur);
+                    break;
+                case -2://Cas où il faut faire clignoter le joueur 2 sélectionné (Noté en -2 dans la matrice)
+                    printf(COLOR_ROUGE FAIRE_CLIGNOTER "%d   "  COLOR_RESET,joueur);
+                    break;
+                default:
+                    printf("%d   ",plateau->tab[i][j]);
+            }
+
         }
         if (i < TAILLE - 1 && (i + 2) != 10){ //Pour éviter d'en avoir une en trop
-            printf("\n\n\t\t%d  -  ",i + 2);
+            printf(COLOR_JAUNE "\n\n\t\t%d  -  " COLOR_RESET,i + 2);
         }
         else if ((i + 2) == 10) {
-            printf("\n\n\t       %d  -  ",i + 2);
+            printf(COLOR_JAUNE "\n\n\t       %d  -  " COLOR_RESET,i + 2);
         }
     }
+
     printf("\n\n");
 }
 

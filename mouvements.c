@@ -5,7 +5,7 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
     
     //On récupère le joueur à déplacer
     extern int joueur;
-    int verification = 1;
+    int verification = 1,verificationSelection = 1;
     Case caseSelectionne,caseDeplacement;
 
     //Boucle de séléction principale ( Pour éviter que l'utilisateur se trompe ou donne une mauvaise case)
@@ -15,10 +15,15 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
         //Boucle de séléction d'un pion
         do {
             selectionnerUnPion(&caseSelectionne,joueur);
-        }while (verificationDeSelection(plateau,&caseSelectionne,joueur));
+            //Le -1 sert de repert pour afficherLePlateau, pour savoir quel pion doit clignoter
+            verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
+            plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = -joueur;
+        }while (verificationSelection);
 
         //Rafraichir l'écran de jeu
         afficherLePlateau(plateau);
+
+        plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = joueur;
 
         //On lui demande les coordonées où il veut aller
         selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
@@ -74,8 +79,7 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
         else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
     	    Case caseSaute;
         	caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
-    	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;
-            printf("%d %d",caseSaute.x,caseSaute.y);	    
+    	    caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;	    
             if(plateau->tab[caseSaute.y - 1][caseSaute.x- 1]  == 1 || plateau->tab[caseSaute.y - 1][caseSaute.x - 1] == 2)
     	    {
     	 	    return 1;
