@@ -41,5 +41,4 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
         }
     }
     return 0;
-
 }
