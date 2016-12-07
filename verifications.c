@@ -43,6 +43,24 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
     return 0;
 }
 
+//je fais une copie du tableau pour éviter de modifier les cases du tableau
+int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
+
+    Case casePossible;
+    for (int i = 0 ; i <= 9 ; i++){
+        for (int j = 0 ; j <= 9 ;j++){
+            casePossible.y = i;
+            casePossible.x = j;
+            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
+                //Le 8 indique une possibilié de déplacement pour le joueur
+                plateau.tab[i - 1][j - 1] = 8;
+            }
+        }
+    }
+    afficherLePlateau(&plateau);
+    return 0;
+}
+
 int verificationDeWin(Plateau *plateau,int joueur){
 
     int nbrDePions = 0;

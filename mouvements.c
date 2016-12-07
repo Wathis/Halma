@@ -19,9 +19,8 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
             verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
             plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = -joueur;
         }while (verificationSelection);
-
-        //Rafraichir l'écran de jeu
-        afficherLePlateau(plateau);
+        
+        indicationDeDeplacement(*plateau,caseSelectionne);
 
         plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = joueur;
 
