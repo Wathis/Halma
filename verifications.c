@@ -42,3 +42,51 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
     }
     return 0;
 }
+
+int verificationDeWin(Plateau *plateau,int joueur){
+
+    int nbrDePions = 0;
+
+    //Haut Gauche
+    if (joueur == 2){
+        for (int i = 0 ; i < 5 ; i++){
+            for (int j = 4 - i; j >= 0 ; j--){
+                if (plateau->tab[i][j] == joueur){
+                    nbrDePions++;
+                }
+            }
+        }
+    }
+
+    //Bas droite 
+    if (joueur == 1){
+        int v = 0;
+        for (int i = 5 ; i <= 9 ; i++){
+            for (int j = 9 - v; j <= 9 ; j++){
+                if (plateau->tab[i][j] == joueur){
+                    nbrDePions++;
+                }
+            }
+            v++;
+        }
+    }
+    
+    if (nbrDePions == 15){
+        return 1; //C'EST GAGNÉ
+    }else {
+         return 0;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

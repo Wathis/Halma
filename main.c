@@ -22,18 +22,23 @@ int main (void){
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
         
         do { //Boucle de la partie en cours
-
             deplacerUnPion(&plateauDeJeu);
-	               
+            
+            if (verificationDeWin(&plateauDeJeu,joueur)){
+                printf("\t\t    Joueur %d gagne\n",joueur);
+                quitterPartie = 1;
+            }
+
             if (joueur < nbDeJoueurs){
-                joueur++;}
+                joueur++;
+            }
             else {
-                joueur = 1;}
-	    sauvegarde(plateauDeJeu);
+                joueur = 1;
+            }
+            sauvegarde(plateauDeJeu);
             
         }while (quitterPartie != 1);
-        
-        
+
     }while (demandeNouvellePartie());
     
     system("clear");

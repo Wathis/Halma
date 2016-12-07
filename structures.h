@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <unistd.h>
+
 #define TAILLE 10
 
 typedef struct Joueur Joueur;
