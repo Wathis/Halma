@@ -20,7 +20,7 @@ int main (void){
         
         //Initialisation du jeu
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
-        
+        chargerSauvegarde(&plateauDeJeu);
         do { //Boucle de la partie en cours
 
             deplacerUnPion(&plateauDeJeu);
