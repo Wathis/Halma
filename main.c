@@ -22,9 +22,13 @@ int main (void){
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
         
         do { //Boucle de la partie en cours
-
             deplacerUnPion(&plateauDeJeu);
-            
+            if (verificationDeWin(&plateauDeJeu,joueur)){
+                printf("Gagné");
+            }
+            else {
+                printf("Pas gagné");
+            }
             if (joueur < nbDeJoueurs)
                 joueur++;
             else 
