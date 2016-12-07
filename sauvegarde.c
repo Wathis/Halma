@@ -7,7 +7,7 @@ void sauvegarde(Plateau plateauDeJeu){
 extern int joueur;
 FILE* fichier = NULL;
 
-fichier = fopen("sauvegarde.txt", "w");
+fichier = fopen(".sauvegarde.txt", "w");
 if(fichier != NULL)
 {
 
@@ -38,7 +38,7 @@ extern int joueur;
 FILE* fichier = NULL;
 int retourALigne;
 
-fichier = fopen("sauvegarde.txt", "r");
+fichier = fopen(".sauvegarde.txt", "r");
 
 if(fichier != NULL)
 {
