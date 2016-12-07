@@ -1,4 +1,4 @@
-#include "mouvements.h"
+#include "sauvegarde.h"
 #define TAILLE 10
 
 int main (void){
@@ -24,11 +24,12 @@ int main (void){
         do { //Boucle de la partie en cours
 
             deplacerUnPion(&plateauDeJeu);
-            
-            if (joueur < nbDeJoueurs)
-                joueur++;
-            else 
-                joueur = 1;
+	               
+            if (joueur < nbDeJoueurs){
+                joueur++;}
+            else {
+                joueur = 1;}
+	    sauvegarde(plateauDeJeu);
             
         }while (quitterPartie != 1);
         
