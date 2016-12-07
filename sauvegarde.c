@@ -42,6 +42,9 @@ fichier = fopen("sauvegarde.txt", "r");
 
 if(fichier != NULL)
 {
+	joueur = fgetc(fichier) - '0';
+	retourALigne = fgetc(fichier);
+	retourALigne = fgetc(fichier);
 	int i,j;
 	char tamp;
 	for(i = 0; i < TAILLE; i++)
