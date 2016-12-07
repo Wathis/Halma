@@ -23,20 +23,19 @@ int main (void){
         
         do { //Boucle de la partie en cours
             deplacerUnPion(&plateauDeJeu);
+            
             if (verificationDeWin(&plateauDeJeu,joueur)){
-                printf("Gagné");
+                printf("\t\t    Joueur %d gagne\n",joueur);
+                quitterPartie = 1;
             }
-            else {
-                printf("Pas gagné");
-            }
+
             if (joueur < nbDeJoueurs)
                 joueur++;
             else 
                 joueur = 1;
             
         }while (quitterPartie != 1);
-        
-        
+
     }while (demandeNouvellePartie());
     
     system("clear");

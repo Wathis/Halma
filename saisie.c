@@ -3,8 +3,7 @@
 //Fonction qui demande si les utilisateurs veulent refaire une partie
 int demandeNouvellePartie(){
 	int quitter;
-	system("clear");
-    printf("Voulez-vous quitter le jeu ? ( 1 = Oui / 2 = Non ) ");
+    printf("\t\t    Voulez-vous quitter le jeu ? ( 1 = Oui / 2 = Non ) ");
     scanf("%d",&quitter);
     if (quitter == 2){
     	return 1;
