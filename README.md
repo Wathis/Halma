@@ -6,3 +6,5 @@ Halma is a board game.
 
 # Langages of programming
 C
+
+TEST
