@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <unistd.h>
+#include <string.h>
 
 #define TAILLE 10
 
@@ -19,7 +20,7 @@ struct Joueur{
 };
 
 struct Plateau{
-    int tab[TAILLE][TAILLE];
+    char tab[TAILLE][TAILLE];
 };
 
 struct Case{

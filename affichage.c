@@ -5,16 +5,16 @@ void afficherLePlateau(Plateau *plateau){
     extern int joueur;
     system("clear");
     printf("\t\t      ");
-    for (int i = 1;i <= 10;i++){
+    for (int i = 0;i <= 9;i++){
         printf(COLOR_JAUNE "%d   " COLOR_RESET,i);
     }
     printf("\n\n\t\t      ");
-    for (int i = 1;i <= 10;i++){
+    for (int i = 0;i <= 9;i++){
 
         printf(COLOR_JAUNE "|   " COLOR_RESET);
     }
 
-    printf(COLOR_JAUNE "\n\n\t\t1  -  " COLOR_RESET);
+    printf(COLOR_JAUNE "\n\n\t\tA  -  " COLOR_RESET);
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
             switch (plateau->tab[i][j]) {
@@ -38,11 +38,8 @@ void afficherLePlateau(Plateau *plateau){
             }
 
         }
-        if (i < TAILLE - 1 && (i + 2) != 10){ //Pour éviter d'en avoir une en trop
-            printf(COLOR_JAUNE "\n\n\t\t%d  -  " COLOR_RESET,i + 2);
-        }
-        else if ((i + 2) == 10) {
-            printf(COLOR_JAUNE "\n\n\t       %d  -  " COLOR_RESET,i + 2);
+        if (i < TAILLE - 1){
+            printf(COLOR_JAUNE "\n\n\t\t%c  -  " COLOR_RESET,i + 66);
         }
     }
 
