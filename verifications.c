@@ -49,11 +49,12 @@ int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
     Case casePossible;
     for (int i = 0 ; i <= 9 ; i++){
         for (int j = 0 ; j <= 9 ;j++){
-            casePossible.y = i;
-            casePossible.x = j;
+            casePossible.y = i + 1;
+            casePossible.x = j + 1;
             if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
                 //Le 8 indique une possibilié de déplacement pour le joueur
-                plateau.tab[i - 1][j - 1] = 8;
+                printf("casePossible : %d %d\n",casePossible.y,casePossible.x);
+                plateau.tab[i][j] = 8;
             }
         }
     }
