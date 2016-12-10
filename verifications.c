@@ -1,7 +1,7 @@
 #include "verifications.h"
 
 int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
-    if (plateau->tab[caseATester->y ][caseATester->x ] != joueur){
+    if (plateau->tab[caseATester->y ][caseATester->x ] != '1'){
         afficherLePlateau(plateau);
         erreur("\tVous avez fait une mauvaise sélection, ce pion ne vous appartient pas");
         return 1;
@@ -11,10 +11,10 @@ int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
 
 //Fonction qui renvoi 1 si la case est prise, et 0 si elle n'est pas prise
 int testDeCase(Plateau *plateau,Case *caseATester){
-    if (plateau->tab[caseATester->y ][caseATester->x ] != 0){
+    if (plateau->tab[caseATester->y ][caseATester->x ] != '0'){
         return 0;
     }
-    else if (caseATester->x > 10 || caseATester->y > 10 || caseATester->x < 1 || caseATester->y < 1){
+    else if (caseATester->x > 9 || caseATester->y > 9 || caseATester->x < 0 || caseATester->y < 0){
         return 0;
     }
     else {
@@ -26,7 +26,6 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
     double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
     if (testDeCase(plateau,&caseDeplacement)){
         //Premiere vérification de déplacement simple
-        printf("Verif : %f\n",distanceEntreDeuxPions); 
         if (distanceEntreDeuxPions <= sqrt(2)){
             return 1;
         }
@@ -35,7 +34,6 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
             Case caseSaute;
             caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
             caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;  
-            printf("Verif : %d %d\n",caseSaute.x,caseSaute.y);    
             if(plateau->tab[caseSaute.y][caseSaute.x]  == 1 || plateau->tab[caseSaute.y ][caseSaute.x ] == 2)
             {
                 return 1;

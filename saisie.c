@@ -36,7 +36,7 @@ void faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ 
 		if (caseSelectionne->x >= 0 && caseSelectionne->x <= 9 && caseSelectionne->y >= 0 && caseSelectionne->y <= 9){
 			saisieCorrecte = 0;
 		}else {
-			printf("Saisie incorecte : %d %d",caseSelectionne->y,caseSelectionne->x);
+			printf("\n\t   Saisie incorecte");
 		}
 
 	}while(saisieCorrecte);

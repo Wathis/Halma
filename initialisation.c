@@ -4,7 +4,7 @@
 void initialiserPlateau(Plateau *plateau){
     for (int i = 0 ; i < TAILLE ; i++){
         for (int j = 0 ; j < TAILLE ; j++){
-            plateau->tab[i][j] = 0;
+            plateau->tab[i][j] = (char) 48;
         }
     }
 }
@@ -18,7 +18,7 @@ void positionnerLesPions(Plateau *plateau,Case *origin,int joueur){ //Avec x et 
     if ( origin->x == 0 && origin->y == 0){
         for (int i = 0 ; i < 5 ; i++){
             for (int j = 4 - i; j >= 0 ; j--){
-                plateau->tab[i][j] = joueur;
+                plateau->tab[i][j] = (char) (joueur + 48);
             }
         }
     }
@@ -29,7 +29,7 @@ void positionnerLesPions(Plateau *plateau,Case *origin,int joueur){ //Avec x et 
         int v = 0;
         for (int i = 5 ; i <= 9 ; i++){
             for (int j = 9 - v; j <= 9 ; j++){
-                plateau->tab[i][j] = joueur;
+                plateau->tab[i][j] = (char) (joueur + 48);
             }
             v++;
         }

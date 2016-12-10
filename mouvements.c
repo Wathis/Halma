@@ -17,13 +17,13 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
             faireUneSaisie(&caseSelectionne,joueur,0);
             //Le -1 sert de repert pour afficherLePlateau, pour savoir quel pion doit clignoter
             verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
-            plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
+            // plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
         }while (verificationSelection);
-        
+        plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
+
         indicationDeDeplacement(*plateau,caseSelectionne);
 
         plateau->tab[caseSelectionne.y][caseSelectionne.x] = joueur;
-
         //On lui demande les coordonées où il veut aller
         faireUneSaisie(&caseDeplacement,joueur,1);
         //On associe a verification la valeur retournée de verification ( Utilie car on modifie plateau->tab après)
