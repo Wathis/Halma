@@ -1,7 +1,7 @@
 #include "verifications.h"
 
 int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
-    if (plateau->tab[caseATester->y ][caseATester->x ] != '1'){
+    if (plateau->tab[caseATester->y ][caseATester->x ] != joueur + 48){
         afficherLePlateau(plateau);
         erreur("\tVous avez fait une mauvaise sélection, ce pion ne vous appartient pas");
         return 1;
@@ -23,6 +23,7 @@ int testDeCase(Plateau *plateau,Case *caseATester){
 }
 
 int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement){
+
     double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
     if (testDeCase(plateau,&caseDeplacement)){
         //Premiere vérification de déplacement simple
@@ -34,7 +35,7 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
             Case caseSaute;
             caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
             caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;  
-            if(plateau->tab[caseSaute.y][caseSaute.x]  == 1 || plateau->tab[caseSaute.y ][caseSaute.x ] == 2)
+            if(plateau->tab[caseSaute.y][caseSaute.x]  == 50 || plateau->tab[caseSaute.y ][caseSaute.x ] == 49)
             {
                 return 1;
             }
@@ -53,7 +54,7 @@ int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
             casePossible.x = j;
             if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
                 //Le 8 indique une possibilié de déplacement pour le joueur
-                plateau.tab[i][j] = 8;
+                plateau.tab[i][j] = '*';
             }
         }
     }
