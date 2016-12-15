@@ -1,7 +1,7 @@
 #include "verifications.h"
 
 int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
-    if (plateau->tab[caseATester->y - 1][caseATester->x - 1] != joueur){
+    if (plateau->tab[caseATester->y ][caseATester->x ] != '1'){
         afficherLePlateau(plateau);
         erreur("\tVous avez fait une mauvaise sélection, ce pion ne vous appartient pas");
         return 1;
@@ -11,10 +11,10 @@ int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
 
 //Fonction qui renvoi 1 si la case est prise, et 0 si elle n'est pas prise
 int testDeCase(Plateau *plateau,Case *caseATester){
-    if (plateau->tab[caseATester->y - 1][caseATester->x - 1] != 0){
+    if (plateau->tab[caseATester->y ][caseATester->x ] != '0'){
         return 0;
     }
-    else if (caseATester->x > 10 || caseATester->y > 10 || caseATester->x < 1 || caseATester->y < 1){
+    else if (caseATester->x > 9 || caseATester->y > 9 || caseATester->x < 0 || caseATester->y < 0){
         return 0;
     }
     else {
@@ -33,8 +33,8 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
         else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
             Case caseSaute;
             caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
-            caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;      
-            if(plateau->tab[caseSaute.y - 1][caseSaute.x- 1]  == 1 || plateau->tab[caseSaute.y - 1][caseSaute.x - 1] == 2)
+            caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;  
+            if(plateau->tab[caseSaute.y][caseSaute.x]  == 1 || plateau->tab[caseSaute.y ][caseSaute.x ] == 2)
             {
                 return 1;
             }
@@ -53,7 +53,7 @@ int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
             casePossible.x = j;
             if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
                 //Le 8 indique une possibilié de déplacement pour le joueur
-                plateau.tab[i - 1][j - 1] = 8;
+                plateau.tab[i][j] = 8;
             }
         }
     }

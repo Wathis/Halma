@@ -14,26 +14,25 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
 
         //Boucle de séléction d'un pion
         do {
-            selectionnerUnPion(&caseSelectionne,joueur);
+            faireUneSaisie(&caseSelectionne,joueur,0);
             //Le -1 sert de repert pour afficherLePlateau, pour savoir quel pion doit clignoter
             verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
-            plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = -joueur;
+            // plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
         }while (verificationSelection);
-        
+        plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
+
         indicationDeDeplacement(*plateau,caseSelectionne);
 
-        plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = joueur;
-
+        plateau->tab[caseSelectionne.y][caseSelectionne.x] = joueur;
         //On lui demande les coordonées où il veut aller
-        selectionnerUneCaseDeplacement(&caseDeplacement,joueur);
+        faireUneSaisie(&caseDeplacement,joueur,1);
         //On associe a verification la valeur retournée de verification ( Utilie car on modifie plateau->tab après)
         verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement);
-        
         //Ici il y aura la vérification 
         if (verification){
             //On déplace le joueur 
-            plateau->tab[caseSelectionne.y - 1][caseSelectionne.x - 1] = 0;
-            plateau->tab[caseDeplacement.y - 1][caseDeplacement.x - 1] = joueur;
+            plateau->tab[caseSelectionne.y][caseSelectionne.x] = 0;
+            plateau->tab[caseDeplacement.y][caseDeplacement.x] = joueur;
             afficherLePlateau(plateau);
         }else {
             afficherLePlateau(plateau);
