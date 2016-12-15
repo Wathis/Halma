@@ -15,12 +15,20 @@ int main (void){
         do { //Boucle du menu
             afficherLeMessageDuMenu();
             nbDeJoueurs = 2;
-            quitterMenu = 1;
-        } while (quitterMenu != 1);
+	    printf("\t 1 : jouer\n\t 2 : charger Partie\n");
+            scanf("%d", &quitterMenu);
+	    
+        } while (quitterMenu != 1 && quitterMenu != 2);
         
         //Initialisation du jeu
+	if(quitterMenu == 1)
+	{
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
-        
+	}
+	else if(quitterMenu == 2){
+	chargerSauvegarde(&plateauDeJeu);
+	}
+	afficherLePlateau(&plateauDeJeu);
         do { //Boucle de la partie en cours
             deplacerUnPion(&plateauDeJeu);
             

@@ -49,6 +49,7 @@ void initialisation(Plateau *plateau,Case *originJoueur1,Case *originJoueur2,int
     initialiserPlateau(plateau);
     positionnerLesPions(plateau,originJoueur1,joueur1);
     positionnerLesPions(plateau,originJoueur2,joueur2);
-    afficherLePlateau(plateau);
+    afficherLePlateau(plateau);    
+   
     joueur = 1;
 }
