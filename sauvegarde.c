@@ -48,7 +48,7 @@ fichier = fopen(".sauvegarde.txt", "r");
 
 if(fichier != NULL)
 {
-	joueur = fgetc(fichier);
+	joueur = fgetc(fichier)-48;
 	retourALigne = fgetc(fichier);
 	retourALigne = fgetc(fichier);
 	int i,j;
