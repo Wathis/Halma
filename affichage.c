@@ -26,11 +26,16 @@ void afficherLePlateau(Plateau *plateau){
             else if (plateau->tab[i][j] == '2'){
                 printf(COLOR_ROUGE "%c   " COLOR_RESET,plateau->tab[i][j]);
             }
-            else if (plateau->tab[i][j] == '*'){
+            else if (plateau->tab[i][j] == 'A'){  //A est pour la séction du joueur 1
+            	plateau->tab[i][j] = joueur + 48;
                 printf(COLOR_CYAN FAIRE_CLIGNOTER "%c   " COLOR_RESET,plateau->tab[i][j]);
             }
-            else if (plateau->tab[i][j] == 'Y'){
+            else if (plateau->tab[i][j] == 'B'){ //B pour la séléction du joueur 2
+            	plateau->tab[i][j] = joueur + 48;
                 printf(COLOR_ROUGE FAIRE_CLIGNOTER "%c   " COLOR_RESET,plateau->tab[i][j]);
+            }
+            else if (plateau->tab[i][j] == '*'){ //pour les possibilités
+                printf(COLOR_VERT "%c   " COLOR_RESET,plateau->tab[i][j]);
             }
             else {
                 printf("%c   ",plateau->tab[i][j]);
