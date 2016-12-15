@@ -44,7 +44,7 @@ void chargerSauvegarde(Plateau *plateauDeJeu)
 	FILE* fichier = NULL;
 	int retourALigne;
 
-	fichier = fopen(".sauvegarde.txt", "r");
+	fichier = fopen(".sauvegardeWin.txt", "r");
 
 	if(fichier != NULL)
 	{

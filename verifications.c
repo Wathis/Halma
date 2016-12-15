@@ -70,7 +70,7 @@ int verificationDeWin(Plateau *plateau,int joueur){
     if (joueur == 2){
         for (int i = 0 ; i < 5 ; i++){
             for (int j = 4 - i; j >= 0 ; j--){
-                if (plateau->tab[i][j] == joueur){
+                if (plateau->tab[i][j] == joueur + 48){
                     nbrDePions++;
                 }
             }
@@ -82,7 +82,7 @@ int verificationDeWin(Plateau *plateau,int joueur){
         int v = 0;
         for (int i = 5 ; i <= 9 ; i++){
             for (int j = 9 - v; j <= 9 ; j++){
-                if (plateau->tab[i][j] == joueur){
+                if (plateau->tab[i][j] == joueur + 48){
                     nbrDePions++;
                 }
             }
