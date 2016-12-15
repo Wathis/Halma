@@ -19,7 +19,7 @@ if(fichier != NULL)
 	{
 		for(j = 0; j<TAILLE; j++)
 		{
-			fprintf(fichier,"%d",plateauDeJeu.tab[i][j]);
+			fprintf(fichier,"%d",plateauDeJeu.tab[i][j]-48);
 			k++;
 			if(k == 5)
 			{
@@ -48,7 +48,7 @@ fichier = fopen(".sauvegarde.txt", "r");
 
 if(fichier != NULL)
 {
-	joueur = fgetc(fichier) - '0';
+	joueur = fgetc(fichier);
 	retourALigne = fgetc(fichier);
 	retourALigne = fgetc(fichier);
 	int i,j;
@@ -57,7 +57,7 @@ if(fichier != NULL)
 	{
 		for(j = 0; j < TAILLE; j++)
 		{
-			plateauDeJeu->tab[i][j]=fgetc(fichier)-'0';
+			plateauDeJeu->tab[i][j]=fgetc(fichier);
 		//	printf("%d", fgetc(fichier)-'0' );		
 		}
  	retourALigne=fgetc(fichier);
