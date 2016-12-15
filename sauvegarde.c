@@ -6,6 +6,7 @@ void sauvegarde(Plateau plateauDeJeu){
 
 extern int joueur;
 FILE* fichier = NULL;
+char tab[5] = {'h','a','l','m','a'};
 
 fichier = fopen(".sauvegarde.txt", "w");
 if(fichier != NULL)
@@ -13,12 +14,17 @@ if(fichier != NULL)
 
 
 	fprintf(fichier, "%d\n\n", joueur);
-	int i, j;
+	int i, j, k=0;
 	for(i = 0; i < TAILLE; i++)
 	{
 		for(j = 0; j<TAILLE; j++)
 		{
 			fprintf(fichier,"%d",plateauDeJeu.tab[i][j]);
+			k++;
+			if(k == 5)
+			{
+				k = 0;
+			}
 		}
 		fprintf(fichier, "\n");
 	
