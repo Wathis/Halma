@@ -14,7 +14,9 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
 
         //Boucle de séléction d'un pion
         do {
-            faireUneSaisie(&caseSelectionne,joueur,0);
+            if (faireUneSaisie(&caseSelectionne,joueur,0) != 0){
+            	return 1;
+            }
             //Le -1 sert de repert pour afficherLePlateau, pour savoir quel pion doit clignoter
             verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
             // plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;

@@ -3,7 +3,7 @@
 //Fonction qui demande si les utilisateurs veulent refaire une partie
 int demandeNouvellePartie(){
 	int quitter;
-    printf("\t\t    Voulez-vous quitter le jeu ? ( 1 = Oui / 2 = Non ) ");
+    printf("\n\t\t    Voulez-vous quitter le jeu ? ( 1 = Oui / 2 = Non ) ");
     scanf("%d",&quitter);
     if (quitter == 2){
     	return 1;
@@ -13,7 +13,7 @@ int demandeNouvellePartie(){
 }
 
 //Fonction pour séléctionner un pion
-void faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ //Coordonnées du pion séléctionné
+int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ //Coordonnées du pion séléctionné
 	char caseSelectionneChar[2];
 	int saisieCorrecte = 1;
 	do {
@@ -25,6 +25,9 @@ void faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ 
 				printf("\n\t   Joueur %d : Les selectionnez votre pion (LigneColonne) :",joueur);
 		    }
 		    scanf("%s",caseSelectionneChar);
+		    if (caseSelectionneChar[0] == 'Q'){
+		    	return 1;
+		    }
 		    if (strlen(caseSelectionneChar) != 2){
 		    	printf("Votre saisie n'est pas correcte, il faut choisir la ligne plus la colonne");
 		    }
@@ -42,6 +45,7 @@ void faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ 
 	}while(saisieCorrecte);
 
 	printf("Saisie : %d %d\n",caseSelectionne->y,caseSelectionne->x);
+	return 0;
 }
 
 

@@ -30,19 +30,22 @@ int main (void){
 	}
 	afficherLePlateau(&plateauDeJeu);
         do { //Boucle de la partie en cours
-            deplacerUnPion(&plateauDeJeu);
+            if (deplacerUnPion(&plateauDeJeu) != 0){
+            	quitterPartie = 1;
+            }
             
             if (verificationDeWin(&plateauDeJeu,joueur)){
                 printf("\t\t    Joueur %d gagne\n",joueur);
                 quitterPartie = 1;
             }
-
-            if (joueur < nbDeJoueurs){
-                joueur++;
-            }
-            else {
-                joueur = 1;
-            }
+            if (quitterPartie != 1){
+	            if (joueur < nbDeJoueurs){
+	                joueur++;
+	            }
+	            else {
+	                joueur = 1;
+	            }
+        	}
             sauvegarde(plateauDeJeu);
             
         }while (quitterPartie != 1);
