@@ -8,6 +8,7 @@ int demandeNouvellePartie(){
 	do {
     	printf("\n\t\t    Voulez-vous quitter le jeu ? ( 1 = Oui / 2 = Non ) ");
     	scanf("%d",&quitter);
+    }while (quitter != 1 && quitter != 2);
     if (quitter == 2){
     	return 1;
     }else {
