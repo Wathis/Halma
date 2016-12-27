@@ -10,10 +10,10 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
 
     //Boucle de séléction principale ( Pour éviter que l'utilisateur se trompe ou donne une mauvaise case)
 
-    do {
+    do {//Boucle de séléction d
 
-        //Boucle de séléction d'un pion
-        do {
+        
+        do { //Premiere boucle pour voir si la séléction est correcte 
             if (faireUneSaisie(&caseSelectionne,joueur,0) != 0){
             	return 1;
             }
@@ -21,14 +21,17 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
             verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
             // plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
         }while (verificationSelection);
+
         if (joueur == 1){
         	plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'A';
     	}else {
     		plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'B';
     	}
 
+    	//Afficher les déplacements possibles
         indicationDeDeplacement(*plateau,caseSelectionne);
 
+        //Conversion en ACSII du joueur
         plateau->tab[caseSelectionne.y][caseSelectionne.x] = joueur + 48;
         //On lui demande les coordonées où il veut aller
         faireUneSaisie(&caseDeplacement,joueur,1);
