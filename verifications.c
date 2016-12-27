@@ -1,5 +1,7 @@
 #include "verifications.h"
 
+//Fonction qui permet la verification d'une selection d'un pion. Elle renvoit 0 si celle si 
+//est possible, sinon 1.
 int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
     if (plateau->tab[caseATester->y ][caseATester->x ] != joueur + 48){
         afficherLePlateau(plateau);
@@ -22,10 +24,13 @@ int testDeCase(Plateau *plateau,Case *caseATester){
     }
 }
 
+//Fonction qui verifie la possibilité de déplacement d'un pion, retourne 1 si le joueur peut se deplacer
 int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement){
-
+    //cette variable contient la distance entre deux cases, pour verifier si le joueur peut se deplacer  
     double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
+    //Si la case n'est pas prise : 
     if (testDeCase(plateau,&caseDeplacement)){
+        //Alors
         //Premiere vérification de déplacement simple
         if (distanceEntreDeuxPions <= sqrt(2)){
             return 1;
@@ -44,29 +49,32 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
     return 0;
 }
 
-//je fais une copie du tableau pour éviter de modifier les cases du tableau
+//Fonction qui indique les possibilités de déplacement
+//nous faisons une copie du tableau pour éviter de modifier les cases du vrai plateau
 int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
-
+    //On test toutes les cases possibles du plateau, grace a verificationDeDeplacement
     Case casePossible;
     for (int i = 0 ; i <= 9 ; i++){
         for (int j = 0 ; j <= 9 ;j++){
             casePossible.y = i;
             casePossible.x = j;
             if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
-                //Le 8 indique une possibilié de déplacement pour le joueur
+                //Le * indique une possibilié de déplacement pour le joueur
                 plateau.tab[i][j] = '*';
             }
         }
     }
+    //On affiche le plateau (copié)
     afficherLePlateau(&plateau);
     return 0;
 }
 
+//Fonction qui verifie si un joueur a gagné 
 int verificationDeWin(Plateau *plateau,int joueur){
 
     int nbrDePions = 0;
 
-    //Haut Gauche
+    //Vérification en haut à gauche
     if (joueur == 2){
         for (int i = 0 ; i < 5 ; i++){
             for (int j = 4 - i; j >= 0 ; j--){
@@ -77,7 +85,7 @@ int verificationDeWin(Plateau *plateau,int joueur){
         }
     }
 
-    //Bas droite 
+    //Vérification en bas à droite 
     if (joueur == 1){
         int v = 0;
         for (int i = 5 ; i <= 9 ; i++){
