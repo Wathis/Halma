@@ -5,50 +5,74 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
     
     //On récupère le joueur à déplacer
     extern int joueur;
+    int nbrDeSautPossible = 0,nbrDeCoupsJoue = 0;
+    char veutRejouer;
     int verification = 1,verificationSelection = 1;
     Case caseSelectionne,caseDeplacement;
 
     //Boucle de séléction principale ( Pour éviter que l'utilisateur se trompe ou donne une mauvaise case)
+    do {
+        do {//Boucle de séléction d'un pion
 
-    do {//Boucle de séléction d
-
-        
-        do { //Premiere boucle pour voir si la séléction est correcte 
-            if (faireUneSaisie(&caseSelectionne,joueur,0) != 0){
-            	return 1;
+            if (nbrDeCoupsJoue == 0){
+                do { //Premiere boucle pour voir si la séléction est correcte 
+                    if (faireUneSaisie(&caseSelectionne,joueur,0) != 0){
+                    	return 1;
+                    }
+                    //Le -1 sert de repert pour afficherLePlateau, pour savoir quel pion doit clignoter
+                    verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
+                    //plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
+                }while (verificationSelection);
+            }else if (verification == 1){
+                caseSelectionne.x = caseDeplacement.x;
+                caseSelectionne.y = caseDeplacement.y;
             }
-            //Le -1 sert de repert pour afficherLePlateau, pour savoir quel pion doit clignoter
-            verificationSelection = verificationDeSelection(plateau,&caseSelectionne,joueur);
-            // plateau->tab[caseSelectionne.y][caseSelectionne.x] = -joueur;
-        }while (verificationSelection);
 
-        if (joueur == 1){
-        	plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'A';
-    	}else {
-    		plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'B';
-    	}
+            if (joueur == 1){
+            	plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'A';
+        	}else {
+        		plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'B';
+        	}
 
-    	//Afficher les déplacements possibles
-        indicationDeDeplacement(*plateau,caseSelectionne);
+        	//Afficher les déplacements possibles
+            if (nbrDeCoupsJoue == 0){
+                indicationDeDeplacement(*plateau,caseSelectionne,1);
+            }
+            else {
+                indicationDeDeplacement(*plateau,caseSelectionne,2);
+            }
+            //Conversion en ACSII du joueur
+            plateau->tab[caseSelectionne.y][caseSelectionne.x] = joueur + 48;
+            //On lui demande les coordonées où il veut aller
+            faireUneSaisie(&caseDeplacement,joueur,1);
+            nbrDeSautPossible = nbrSautPossible(plateau,caseDeplacement);
+            //On associe a verification la valeur retournée de verification ( Utile car on modifie plateau->tab après)
+            if (nbrDeCoupsJoue == 0){
+                verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement,1);
+            }
+            else {
+                verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement,2);
+            }
+            nbrDeCoupsJoue++;
+            //Ici il y aura la vérification 
+            if (verification){
+                //On déplace le joueur 
+                plateau->tab[caseSelectionne.y][caseSelectionne.x] = '0';
+                plateau->tab[caseDeplacement.y][caseDeplacement.x] = joueur + 48;
+                afficherLePlateau(plateau);
+            }else {
+                afficherLePlateau(plateau);
+                erreur("\t   Vous n'avez pas le droit de faire ce déplacement  \n");
+            }
 
-        //Conversion en ACSII du joueur
-        plateau->tab[caseSelectionne.y][caseSelectionne.x] = joueur + 48;
-        //On lui demande les coordonées où il veut aller
-        faireUneSaisie(&caseDeplacement,joueur,1);
-        //On associe a verification la valeur retournée de verification ( Utilie car on modifie plateau->tab après)
-        verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement);
-        //Ici il y aura la vérification 
-        if (verification){
-            //On déplace le joueur 
-            plateau->tab[caseSelectionne.y][caseSelectionne.x] = '0';
-            plateau->tab[caseDeplacement.y][caseDeplacement.x] = joueur + 48;
-            afficherLePlateau(plateau);
-        }else {
-            afficherLePlateau(plateau);
-            erreur("\t   Vous n'avez pas le droit de faire ce déplacement");
+        }while(!(verification));
+
+        if (nbrDeSautPossible != 0){
+            while(getchar() != '\n');
+            printf("\n\t\t  Vous pouvez rejouer avec le même pion, voulez vous le faire ? O / N :");
+            scanf("%c",&veutRejouer);
         }
-
-    }while(!(verification));
+    }while(nbrDeSautPossible != 0 && veutRejouer == 'O');
 
     return 0;
 }

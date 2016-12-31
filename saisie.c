@@ -16,7 +16,7 @@ int demandeNouvellePartie(){
     }
 }
 
-//Fonction pour séléctionner un pion
+//Fonction pour séléctionner un pion, retourne 1 pour quitter, et 2 pour ne pas rejouer
 int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ //Coordonnées du pion séléctionné
 	//Stockage de la case séléctionné dans un tableau de 2 char 
 	char caseSelectionneChar[2];
@@ -36,6 +36,9 @@ int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ /
 		    //Quitter si le caractere est Q 
 		    if (caseSelectionneChar[0] == 'Q'){
 		    	return 1;
+		    }
+		    if (caseSelectionneChar[0] == 'N'){
+		    	return 2;
 		    }
 		    if (strlen(caseSelectionneChar) != 2){
 		    	printf("Votre saisie n'est pas correcte");

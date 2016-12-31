@@ -24,19 +24,45 @@ int testDeCase(Plateau *plateau,Case *caseATester){
     }
 }
 
+//Fonction qui permet de renvoyer e nombre de saut possible pour le joueur
+int nbrSautPossible(Plateau *plateau,Case caseSelectionne){
+    int nbrDeSautsPossibles = 0;
+    Case casePossible;
+    for (int i = 0 ; i <= 9 ; i++){
+        for (int j = 0 ; j <= 9 ;j++){
+            casePossible.y = i;
+            casePossible.x = j;
+            double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - casePossible.x),2) + pow((caseSelectionne.y - casePossible.y),2));
+            if (((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )) && testDeCase(plateau,&casePossible)){
+                Case caseSaute;
+                caseSaute.x = (caseSelectionne.x+casePossible.x)/2;
+                caseSaute.y = (caseSelectionne.y+casePossible.y)/2;  
+                if(plateau->tab[caseSaute.y][caseSaute.x]  == 50 || plateau->tab[caseSaute.y ][caseSaute.x ] == 49)
+                {
+                    nbrDeSautsPossibles++;
+                }
+            }
+        }
+    }
+    return nbrDeSautsPossibles;
+
+}
+
 //Fonction qui verifie la possibilité de déplacement d'un pion, retourne 1 si le joueur peut se deplacer
-int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement){
+int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement,int typeVerification){
     //cette variable contient la distance entre deux cases, pour verifier si le joueur peut se deplacer  
     double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
     //Si la case n'est pas prise : 
-    if (testDeCase(plateau,&caseDeplacement)){
-        //Alors
-        //Premiere vérification de déplacement simple
-        if (distanceEntreDeuxPions <= sqrt(2)){
-            return 1;
+    if (testDeCase(plateau,&caseDeplacement)){    
+        if (typeVerification == 1){ // Si le type de verification est 1 , on doit verifier les déplacements simples
+                //Alors
+                //Premiere vérification de déplacement simple
+                if (distanceEntreDeuxPions <= sqrt(2)){
+                    return 1;
+                }
         }
         //Deuxieme vérification de saut
-        else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
+        if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
             Case caseSaute;
             caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
             caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;  
@@ -51,14 +77,19 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
 
 //Fonction qui indique les possibilités de déplacement
 //nous faisons une copie du tableau pour éviter de modifier les cases du vrai plateau
-int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
+//le type 1 est le type d'indication de la premiere fois qu'il joue, et 2 de la possibilité de rejouer
+int indicationDeDeplacement(Plateau plateau,Case caseSelectionne,int typeIndication){
     //On test toutes les cases possibles du plateau, grace a verificationDeDeplacement
     Case casePossible;
     for (int i = 0 ; i <= 9 ; i++){
         for (int j = 0 ; j <= 9 ;j++){
             casePossible.y = i;
             casePossible.x = j;
-            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
+            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible,1) && typeIndication == 1){
+                //Le * indique une possibilié de déplacement pour le joueur
+                plateau.tab[i][j] = '*';
+            }
+            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible,2) && typeIndication == 2){
                 //Le * indique une possibilié de déplacement pour le joueur
                 plateau.tab[i][j] = '*';
             }

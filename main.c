@@ -26,7 +26,7 @@ int main (void){
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
 	}
 	else if(quitterMenu == 2){
-	chargerSauvegarde(&plateauDeJeu);
+		chargerSauvegarde(&plateauDeJeu);
 	}
 	afficherLePlateau(&plateauDeJeu);
         do { //Boucle de la partie en cours
