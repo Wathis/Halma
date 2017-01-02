@@ -20,7 +20,7 @@ int demandeNouvellePartie(){
 int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ //Coordonnées du pion séléctionné
 	//Stockage de la case séléctionné dans un tableau de 2 char 
 	char caseSelectionneChar[2];
-	//Variavle pour stocker la vérification de saisie
+	//Variable pour stocker la vérification de saisie
 	int saisieCorrecte = 1;
 	//Variable d'échange
 	char swap;

@@ -28,17 +28,24 @@ int testDeCase(Plateau *plateau,Case *caseATester){
 int nbrSautPossible(Plateau *plateau,Case caseSelectionne){
     int nbrDeSautsPossibles = 0;
     Case casePossible;
+    //On test toutes les cases du tableau pour voir lesquelles sont possibles a jouer
     for (int i = 0 ; i <= 9 ; i++){
         for (int j = 0 ; j <= 9 ;j++){
             casePossible.y = i;
             casePossible.x = j;
+            //Calcul de la distance entre la case Selectionne et la case Possible
             double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - casePossible.x),2) + pow((caseSelectionne.y - casePossible.y),2));
+            //Si la distance est egale a la racine de 8 ou a 2 ( racine 8 -> distance exacte pour une case de saut, 2 -> distance exacte pour deplacement normale )
+            //et qu'il n'y a pas d'autre joueur 
             if (((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )) && testDeCase(plateau,&casePossible)){
                 Case caseSaute;
+                //On stocke la case sauté (celle entre la case possible et la case selectionne )
                 caseSaute.x = (caseSelectionne.x+casePossible.x)/2;
                 caseSaute.y = (caseSelectionne.y+casePossible.y)/2;  
+                //Si c'est un pion ( 50 ou 49 ( 2 ou 1 ))
                 if(plateau->tab[caseSaute.y][caseSaute.x]  == 50 || plateau->tab[caseSaute.y ][caseSaute.x ] == 49)
                 {
+                	//Alors on incremente le nombre de saut possible
                     nbrDeSautsPossibles++;
                 }
             }
