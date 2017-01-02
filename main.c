@@ -20,7 +20,7 @@ int main (void){
 	    
         } while (quitterMenu != 1 && quitterMenu != 2);
         
-        //Initialisation du jeu
+    //Initialisation du jeu
 	if(quitterMenu == 1)
 	{
         initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
@@ -34,10 +34,12 @@ int main (void){
             	quitterPartie = 1;
             }
             
+            //Si la verificationDeWin renvoie 1 => alors on affiche le gagnant et quitte la partie
             if (verificationDeWin(&plateauDeJeu,joueur)){
                 printf("\t\t    Joueur %d gagne\n",joueur);
                 quitterPartie = 1;
             }
+            //Si il ne faut pas quitter la partie => on change de joueur 
             if (quitterPartie != 1){
 	            if (joueur < nbDeJoueurs){
 	                joueur++;
