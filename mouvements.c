@@ -28,6 +28,7 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
                 caseSelectionne.y = caseDeplacement.y;
             }
 
+            //Permet d'indiquer a l'algorithme quel pion doit clignoter ( voir affichage.c )
             if (joueur == 1){
             	plateau->tab[caseSelectionne.y][caseSelectionne.x] = 'A';
         	}else {
@@ -44,15 +45,15 @@ int deplacerUnPion(Plateau *plateau){ //x et y sont les coordonnées où déplac
             //Conversion en ACSII du joueur
             plateau->tab[caseSelectionne.y][caseSelectionne.x] = joueur + 48;
             //On lui demande les coordonées où il veut aller
-            printf("nbr saut :%d\n",nbrDeSautPossible);
-            printf("verif :%d\n",verification);
             faireUneSaisie(&caseDeplacement,joueur,1);
             nbrDeSautPossible = nbrSautPossible(plateau,caseDeplacement);
             //On associe a verification la valeur retournée de verification ( Utile car on modifie plateau->tab après)
             if (nbrDeCoupsJoue == 0){ 
+            	//Premier type de verification qui verifie les coups simple et doucle 
                 verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement,1);
             }
             else {
+            	//Deuxieme type qui verifie uniquement pour les coups double ( car c'est un combo comme nbrDeCoupsJoue > 0)
                 verification = verificationDeDeplacement(plateau,caseSelectionne,caseDeplacement,2);
             }
             //Ici il y aura la vérification 
