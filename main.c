@@ -4,14 +4,14 @@
 int main (void){
 
     //Déclarations des variables
-    int quitter = 0,quitterPartie = 0,quitterMenu = 0,nbDeJoueurs;
+    int quitterPartie = 0,quitterMenu = 0,nbDeJoueurs;
     Plateau plateauDeJeu;
     Case caseOriginJoueur1,caseOriginJoueur2;
 
     //Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
 
     do { //Boucle principale du jeu
-        
+        quitterPartie = 0;
         do { //Boucle du menu
             afficherLeMessageDuMenu();
             nbDeJoueurs = 2;
@@ -20,15 +20,15 @@ int main (void){
 	    
         } while (quitterMenu != 1 && quitterMenu != 2);
         
-    //Initialisation du jeu
-	if(quitterMenu == 1)
-	{
-        initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
-	}
-	else if(quitterMenu == 2){
-		chargerSauvegarde(&plateauDeJeu);
-	}
-	afficherLePlateau(&plateauDeJeu);
+        //Initialisation du jeu
+    	if(quitterMenu == 1)
+    	{
+            initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
+    	}
+    	else if(quitterMenu == 2){
+    		chargerSauvegarde(&plateauDeJeu);
+    	}
+    	afficherLePlateau(&plateauDeJeu);
         do { //Boucle de la partie en cours
             if (deplacerUnPion(&plateauDeJeu) != 0){
             	quitterPartie = 1;
