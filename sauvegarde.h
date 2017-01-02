@@ -1,5 +1,5 @@
 #include "mouvements.h"
-
+#include <string.h>
 
 
 void sauvegarde(Plateau plateauDeJeu);
