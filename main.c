@@ -15,7 +15,7 @@ int main (void){
         do { //Boucle du menu
             afficherLeMessageDuMenu();
             nbDeJoueurs = 2;
-	    printf("\t 1 : jouer\n\t 2 : charger Partie\n");
+	    printf("\t 1 : Nouvelle partie\n\t 2 : Charger la partie en cours\n");
             scanf("%d", &quitterMenu);
 	    
         } while (quitterMenu != 1 && quitterMenu != 2);
