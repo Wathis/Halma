@@ -25,25 +25,25 @@ void afficherLePlateau(Plateau *plateau){
         for (int j = 0 ; j < TAILLE ; j++){
         	//Si la case est 0, mettre 0 en blanc
             if (plateau->tab[i][j] == '0'){
-                printf(COLOR_BLANC "%c   " COLOR_RESET,plateau->tab[i][j]);
+                printf(COLOR_BLANC "%c   " COLOR_RESET,' ');
             }
             //Sinon si la case est 1 mettre en cyan
             else if (plateau->tab[i][j] == '1'){
-                printf(COLOR_CYAN "%c   " COLOR_RESET,plateau->tab[i][j]);
+                printf(COLOR_CYAN "%c   " COLOR_RESET,'X');
             }
             //Sinon si la case est 2 mettre en rouge
             else if (plateau->tab[i][j] == '2'){
-                printf(COLOR_ROUGE "%c   " COLOR_RESET,plateau->tab[i][j]);
+                printf(COLOR_ROUGE "%c   " COLOR_RESET,'O');
             }
             //Sinon si la case est A mettre en cyan et clignoter ( Veut dire que c'est la séléction du joueur )
             else if (plateau->tab[i][j] == 'A'){  //A est pour la séction du joueur 1
             	plateau->tab[i][j] = joueur + 48;
-                printf(COLOR_CYAN FAIRE_CLIGNOTER "%c   " COLOR_RESET,plateau->tab[i][j]);
+                printf(COLOR_CYAN FAIRE_CLIGNOTER "%c   " COLOR_RESET,'X');
             }
             //Sinon si la case est B mettre en rouge et clignoter ( Veut dire que c'est la séléction du joueur )
             else if (plateau->tab[i][j] == 'B'){ //B pour la séléction du joueur 2
             	plateau->tab[i][j] = joueur + 48;
-                printf(COLOR_ROUGE FAIRE_CLIGNOTER "%c   " COLOR_RESET,plateau->tab[i][j]);
+                printf(COLOR_ROUGE FAIRE_CLIGNOTER "%c   " COLOR_RESET,'O');
             }
             //Sinon si la case est * mettre en vert ( possibilités )
             else if (plateau->tab[i][j] == '*'){ //pour les possibilités
