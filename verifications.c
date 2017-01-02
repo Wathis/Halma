@@ -48,7 +48,7 @@ int nbrSautPossible(Plateau *plateau,Case caseSelectionne){
 
 }
 
-//Fonction qui verifie la possibilité de déplacement d'un pion, retourne 1 si le joueur peut se deplacer
+//Fonction qui verifie la possibilité de déplacement d'un pion, retourne 1 si le joueur a fait un deplacement simple, et 2 si il a fait saut
 int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement,int typeVerification){
     //cette variable contient la distance entre deux cases, pour verifier si le joueur peut se deplacer  
     double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
@@ -68,7 +68,7 @@ int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDep
             caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;  
             if(plateau->tab[caseSaute.y][caseSaute.x]  == 50 || plateau->tab[caseSaute.y ][caseSaute.x ] == 49)
             {
-                return 1;
+                return 2;
             }
         }
     }
