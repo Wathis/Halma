@@ -1,5 +1,7 @@
 #include "verifications.h"
 
+//Fonction qui permet la verification d'une selection d'un pion. Elle renvoit 0 si celle si 
+//est possible, sinon 1.
 int verificationDeSelection(Plateau *plateau,Case *caseATester,int joueur){
     if (plateau->tab[caseATester->y ][caseATester->x ] != joueur + 48){
         afficherLePlateau(plateau);
@@ -22,67 +24,111 @@ int testDeCase(Plateau *plateau,Case *caseATester){
     }
 }
 
-int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement){
+//Fonction qui permet de renvoyer e nombre de saut possible pour le joueur
+int nbrSautPossible(Plateau *plateau,Case caseSelectionne){
+    int nbrDeSautsPossibles = 0;
+    Case casePossible;
+    //On test toutes les cases du tableau pour voir lesquelles sont possibles a jouer
+    for (int i = 0 ; i <= 9 ; i++){
+        for (int j = 0 ; j <= 9 ;j++){
+            casePossible.y = i;
+            casePossible.x = j;
+            //Calcul de la distance entre la case Selectionne et la case Possible
+            double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - casePossible.x),2) + pow((caseSelectionne.y - casePossible.y),2));
+            //Si la distance est egale a la racine de 8 ou a 2 ( racine 8 -> distance exacte pour une case de saut, 2 -> distance exacte pour deplacement normale )
+            //et qu'il n'y a pas d'autre joueur 
+            if (((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )) && testDeCase(plateau,&casePossible)){
+                Case caseSaute;
+                //On stocke la case sauté (celle entre la case possible et la case selectionne )
+                caseSaute.x = (caseSelectionne.x+casePossible.x)/2;
+                caseSaute.y = (caseSelectionne.y+casePossible.y)/2;  
+                //Si c'est un pion ( 50 ou 49 ( 2 ou 1 ))
+                if(plateau->tab[caseSaute.y][caseSaute.x]  == 50 || plateau->tab[caseSaute.y ][caseSaute.x ] == 49)
+                {
+                	//Alors on incremente le nombre de saut possible
+                    nbrDeSautsPossibles++;
+                }
+            }
+        }
+    }
+    return nbrDeSautsPossibles;
 
+}
+
+//Fonction qui verifie la possibilité de déplacement d'un pion, retourne 1 si le joueur a fait un deplacement simple, et 2 si il a fait saut
+int verificationDeDeplacement(Plateau *plateau,Case caseSelectionne,Case caseDeplacement,int typeVerification){
+    //cette variable contient la distance entre deux cases, pour verifier si le joueur peut se deplacer  
     double distanceEntreDeuxPions = sqrt(pow((caseSelectionne.x - caseDeplacement.x),2) + pow((caseSelectionne.y - caseDeplacement.y),2));
-    if (testDeCase(plateau,&caseDeplacement)){
-        //Premiere vérification de déplacement simple
-        if (distanceEntreDeuxPions <= sqrt(2)){
-            return 1;
+    //Si la case n'est pas prise : 
+    if (testDeCase(plateau,&caseDeplacement)){    
+        if (typeVerification == 1){ // Si le type de verification est 1 , on doit verifier les déplacements simples
+                //Alors
+                //Premiere vérification de déplacement simple
+                if (distanceEntreDeuxPions <= sqrt(2)){
+                    return 1;
+                }
         }
         //Deuxieme vérification de saut
-        else if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
+        if ((distanceEntreDeuxPions == sqrt(8) || distanceEntreDeuxPions == 2 )){
             Case caseSaute;
             caseSaute.x = (caseSelectionne.x+caseDeplacement.x)/2;
             caseSaute.y = (caseSelectionne.y+caseDeplacement.y)/2;  
             if(plateau->tab[caseSaute.y][caseSaute.x]  == 50 || plateau->tab[caseSaute.y ][caseSaute.x ] == 49)
             {
-                return 1;
+                return 2;
             }
         }
     }
     return 0;
 }
 
-//je fais une copie du tableau pour éviter de modifier les cases du tableau
-int indicationDeDeplacement(Plateau plateau,Case caseSelectionne){
-
+//Fonction qui indique les possibilités de déplacement
+//nous faisons une copie du tableau pour éviter de modifier les cases du vrai plateau
+//le type 1 est le type d'indication de la premiere fois qu'il joue, et 2 de la possibilité de rejouer
+int indicationDeDeplacement(Plateau plateau,Case caseSelectionne,int typeIndication){
+    //On test toutes les cases possibles du plateau, grace a verificationDeDeplacement
     Case casePossible;
     for (int i = 0 ; i <= 9 ; i++){
         for (int j = 0 ; j <= 9 ;j++){
             casePossible.y = i;
             casePossible.x = j;
-            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible)){
-                //Le 8 indique une possibilié de déplacement pour le joueur
+            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible,1) && typeIndication == 1){
+                //Le * indique une possibilié de déplacement pour le joueur
+                plateau.tab[i][j] = '*';
+            }
+            if (verificationDeDeplacement(&plateau,caseSelectionne,casePossible,2) && typeIndication == 2){
+                //Le * indique une possibilié de déplacement pour le joueur
                 plateau.tab[i][j] = '*';
             }
         }
     }
+    //On affiche le plateau (copié)
     afficherLePlateau(&plateau);
     return 0;
 }
 
+//Fonction qui verifie si un joueur a gagné 
 int verificationDeWin(Plateau *plateau,int joueur){
 
     int nbrDePions = 0;
 
-    //Haut Gauche
+    //Vérification en haut à gauche
     if (joueur == 2){
         for (int i = 0 ; i < 5 ; i++){
             for (int j = 4 - i; j >= 0 ; j--){
-                if (plateau->tab[i][j] == joueur){
+                if (plateau->tab[i][j] == joueur + 48){
                     nbrDePions++;
                 }
             }
         }
     }
 
-    //Bas droite 
+    //Vérification en bas à droite 
     if (joueur == 1){
         int v = 0;
         for (int i = 5 ; i <= 9 ; i++){
             for (int j = 9 - v; j <= 9 ; j++){
-                if (plateau->tab[i][j] == joueur){
+                if (plateau->tab[i][j] == joueur + 48){
                     nbrDePions++;
                 }
             }
