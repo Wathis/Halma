@@ -41,7 +41,7 @@ int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ /
 		    	return 2;
 		    }
 		    if (strlen(caseSelectionneChar) != 2){
-		    	printf("Votre saisie n'est pas correcte");
+		    	printf("\t\t   Votre saisie n'est pas correcte");
 		    }
 		}while(strlen(caseSelectionneChar) != 2);
 
