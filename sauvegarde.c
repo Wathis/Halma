@@ -9,9 +9,16 @@ void sauvegarde(Plateau plateauDeJeu, char *save){
 
 	// création d'un pointeur
 	FILE* fichier = NULL;
-	
+ 	
+	char *fich = "";
+	strcat(fich, ".");
+	strcat(fich, save);
+	strcat(fich, ".txt");
+
+	printf("=========== %s =============", fich);
+		
 	// le pointeur fichier est pointé sur le fichier ".sauvegarde.txt"
-	fichier = fopen(save, "w");
+	fichier = fopen(fich, "w");
 
 	// on test si le fichier est bien ouvert
 	if(fichier != NULL)
@@ -60,8 +67,19 @@ void chargerSauvegarde(Plateau *plateauDeJeu, char *save)
 	extern int joueur;
 	FILE* fichier = NULL;
 	int retourALigne;
+	
+	printf("======= %s ======", save);
 
-	fichier = fopen(save, "r");
+	char fich[25] = "";
+	
+	
+	strcat(fich, ".");
+	strcat(fich, save);
+	strcat(fich, ".txt");
+	
+	printf("=========== %s =============", fich);
+	
+	fichier = fopen(fich, "r");
 
 if(fichier != NULL)
 {
@@ -127,19 +145,26 @@ else{
 void recupererPartie(char **parties, int taille)
 {
 
-const int TAILLE_MAX = 20;
+const int TAILLE_MAX = 25;
 FILE* fichier = NULL;
-fichier = fopen(".parties", "a");
+printf("salut");
+fichier = fopen(".parties.txt", "r");
 int i = 0;
-char chaine[20] = "";
-
+char chaine[25] = "";
+printf("salut2");
 if(fichier != NULL)
-{
-	while(fgets(chaine, TAILLE_MAX, fichier) != NULL)
-	{
-		*parties[i] = *chaine;
+{	
+	printf("fin");
+	while(fgets(chaine, 1000, fichier) != NULL)
+		{
+		
+		parties[i] = chaine;
+		printf("ihey =>  %s \n", parties[i]);
+		printf("%d\n", i);
 		i++;
 	}
+	i++;
+	*parties[i] = '0';
 	fclose(fichier);
 }
 else{
