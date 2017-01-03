@@ -72,7 +72,10 @@ void afficherLeMessageDuMenu(){
     printf("\t  #                       JEU DU HALMA                          #\n");
     printf("\t  #                                                             #\n");
     printf("\t  ###############################################################\n\n\n");
-    printf("\t\t Rappel ! X = Joueur 1 et O = Joueur 2\n\n\t 1 : Nouvelle partie\n\t 2 : Charger la partie en cours\n\nChoix : ");        
+    printf("\t\t Rappel ! X = Joueur 1 et O = Joueur 2");
+    printf("\n\n\t 1 : Nouvelle partie");
+    printf("\n\t 2 : Charger la partie en cours");
+    printf("\n\nChoix : ");        
 }
 
 //Fonction pour afficher une erreur
