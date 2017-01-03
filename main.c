@@ -7,6 +7,7 @@ int main (void){
     int quitterPartie = 0,choix = 0,nbDeJoueurs,partieChoisie;
     Plateau plateauDeJeu;
     Case caseOriginJoueur1,caseOriginJoueur2;
+    char nomDeNouvellePartie[10];
     char *save = ".sauvegarde.txt";
     //Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
 
@@ -21,6 +22,7 @@ int main (void){
         //Initialisation du jeu
     	if(choix == 1)
     	{
+            saisirNomDeNouvellePartie(nomDeNouvellePartie);
             initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
     	}
     	else if(choix == 2){
