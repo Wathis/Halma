@@ -24,7 +24,7 @@ int main (void){
             initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
     	}
     	else if(choix == 2){
-    		char *parties[10] = {"Partie 1","Partie 2","Partie 3","Partie 4","Partie 5","0"};
+    		char *parties[10] = {"sauvegarde","Partie 2","Partie 3","Partie 4","Partie 5","0"};
     		afficherLesParties(parties,10);
             scanf("%d",&partieChoisie);
     		chargerSauvegarde(&plateauDeJeu,parties[partieChoisie - 1]);
