@@ -80,8 +80,14 @@ void afficherLeMessageDuMenu(){
 
 void afficherLesParties(char **parties,int tailleTab){  
 	int i = 0;
+	system("clear");
+	printf("\t  ###############################################################\n");
+    printf("\t  #                                                             #\n");
+    printf("\t  #                       Voici les parties                     #\n");
+    printf("\t  #                                                             #\n");
+    printf("\t  ###############################################################\n\n\n");
 	while(*parties[i] != '0'){ //Le / est la fin de la liste des parties 
-		printf("\t\t %d : %s\n",i + 1,parties[i]);
+		printf("\t\t\t\t %d : %s\n",i + 1,parties[i]);
 		i++;
 	}
 }
