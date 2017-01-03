@@ -16,19 +16,6 @@ int demandeNouvellePartie(){
     }
 }
 
-//fonction qui permet de saisir le nom d'une nouvelle partie
-//
-void saisirNomDeNouvellePartie(char *nomDeNouvellePartie){
-    system("clear");
-    do {
-    	printf("Entrez le nom de votre partie (20 charactères max) : ");
-    	scanf("%s",nomDeNouvellePartie);
-    	if (strlen(nomDeNouvellePartie) >= 20){
-    		printf("Vous avez saisi un nom de partie trop grand\n");
-    	}
-    }while(strlen(nomDeNouvellePartie) >= 20);
-}
-
 //Fonction pour séléctionner un pion, retourne 1 pour quitter, et 2 pour ne pas rejouer
 int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ //Coordonnées du pion séléctionné
 	//Stockage de la case séléctionné dans un tableau de 2 char 

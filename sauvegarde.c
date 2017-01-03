@@ -10,12 +10,7 @@ void sauvegarde(Plateau plateauDeJeu, char *save){
 	// création d'un pointeur
 	FILE* fichier = NULL;
  	
-	char *fich = "";
-	strcat(fich, ".");
-	strcat(fich, save);
-	strcat(fich, ".txt");
-
-	printf("=========== %s =============", fich);
+	char fich[] = ".Sauvegarde precedante.txt";
 		
 	// le pointeur fichier est pointé sur le fichier ".sauvegarde.txt"
 	fichier = fopen(fich, "w");
@@ -67,53 +62,49 @@ void chargerSauvegarde(Plateau *plateauDeJeu, char *save)
 	extern int joueur;
 	FILE* fichier = NULL;
 	int retourALigne;
-	
-	printf("======= %s ======", save);
 
-	char fich[25] = "";
+	char fich[35] = "";
 	
 	
 	strcat(fich, ".");
 	strcat(fich, save);
 	strcat(fich, ".txt");
 	
-	printf("=========== %s =============", fich);
-	
 	fichier = fopen(fich, "r");
 
-if(fichier != NULL)
-{
-	// récupération du numéro du joueur qui doit jouer
-	joueur = fgetc(fichier)-48;
-	
-	//déplacement au sein du fichier
-	retourALigne = fgetc(fichier);
-	retourALigne = fgetc(fichier);
-
-	// initialisation des variables internes à la fonction
-	int i,j,k=0, tamp1, tamp2;
-	char tab[8] = {'h','a','l','m','a','i','f','s'};
-
-	for(i = 0; i < TAILLE; i++)
+	if(fichier != NULL)
 	{
-		for(j = 0; j < TAILLE; j++)
-		{	
-			//récupération de 2 numéros à la suite
-			tamp1 = fgetc(fichier)-48;
-			tamp2 = fgetc(fichier)-48;
+		// récupération du numéro du joueur qui doit jouer
+		joueur = fgetc(fichier)-48;
+		
+		//déplacement au sein du fichier
+		retourALigne = fgetc(fichier);
+		retourALigne = fgetc(fichier);
 
-			// concaténation des variables tamp1 et tamp2 pour récupérer le code acsii
-			tamp1 = tamp1*10 + tamp2;
+		// initialisation des variables internes à la fonction
+		int i,j,k=0, tamp1, tamp2;
+		char tab[8] = {'h','a','l','m','a','i','f','s'};
 
-			// on décrypte et on place la sauvegarde dans la structure  plateau de jeu 
-			plateauDeJeu->tab[i][j] = tamp1+108-tab[k];
+		for(i = 0; i < TAILLE; i++)
+		{
+			for(j = 0; j < TAILLE; j++)
+			{	
+				//récupération de 2 numéros à la suite
+				tamp1 = fgetc(fichier)-48;
+				tamp2 = fgetc(fichier)-48;
 
-			k++;
-			if(k == 8){k=0;}	
+				// concaténation des variables tamp1 et tamp2 pour récupérer le code acsii
+				tamp1 = tamp1*10 + tamp2;
+
+				// on décrypte et on place la sauvegarde dans la structure  plateau de jeu 
+				plateauDeJeu->tab[i][j] = tamp1+108-tab[k];
+
+				k++;
+				if(k == 8){k=0;}	
+			}
+			
+			
 		}
-		
-		
-	}
 		fclose(fichier);
 	}
 	else
@@ -144,32 +135,27 @@ else{
 
 void recupererPartie(char **parties, int taille)
 {
-
-const int TAILLE_MAX = 25;
-FILE* fichier = NULL;
-printf("salut");
-fichier = fopen(".parties.txt", "r");
-int i = 0;
-char chaine[25] = "";
-printf("salut2");
-if(fichier != NULL)
-{	
-	printf("fin");
-	while(fgets(chaine, 1000, fichier) != NULL)
-		{
-		
-		parties[i] = chaine;
-		printf("ihey =>  %s \n", parties[i]);
-		printf("%d\n", i);
+	const int TAILLE_MAX = 25;
+	FILE* fichier = NULL;
+	fichier = fopen(".parties.txt", "r");
+	int i = 0;
+	char chaine[57];
+	if(fichier != NULL)
+	{	
+		while(fgets(chaine, 50, fichier) != NULL){
+			printf("Lecture 2=>  %s \n",chaine);
+			parties[i] = chaine;
+			printf("Lecture =>  %s \n",parties[i]);
+			i++;
+		}
 		i++;
+		parties[i] = "0";
+		fclose(fichier);
 	}
-	i++;
-	*parties[i] = '0';
-	fclose(fichier);
-}
-else{
-	printf("Le fichier .parties ne s'ouvrent pas");
-}
+	else{
+		printf("Le fichier .parties ne s'ouvrent pas");
+	}
+	printf("Resultat =>  %s \n", parties[0]);
 }
 
 

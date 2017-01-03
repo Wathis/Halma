@@ -22,18 +22,13 @@ int main (void){
         //Initialisation du jeu
     	if(choix == 1)
     	{
-            saisirNomDeNouvellePartie(nomDeNouvellePartie);
             initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
     	}
     	else if(choix == 2){
-    		char *parties[10];
-		recupererPartie(parties, 10);
-
-		printf("parties[0] ==> %c", *parties[1]);
+    		char *parties[10] = {"Sauvegarde Precedante","Sauvegarde Gagne","Sauvegarde double saut","0"};
+		    //recupererPartie(parties, 10); //Nous n'avons pas reussi à faire marcher cette fonction
     		afficherLesParties(parties,10);
-    		while(getchar() != '\n');
-                scanf("%d",&partieChoisie);
-	    	
+            scanf("%d",&partieChoisie);
     		chargerSauvegarde(&plateauDeJeu,parties[partieChoisie - 1]);
     	}
     	afficherLePlateau(&plateauDeJeu);
@@ -56,7 +51,7 @@ int main (void){
 	                joueur = 1;
 	            }
         	}
-            sauvegarde(plateauDeJeu, save);
+            sauvegarde(plateauDeJeu, ".Sauvegarde Precendante.txt");
             
         }while (quitterPartie != 1);
 
