@@ -2,7 +2,7 @@
 
 
 
-void sauvegarde(Plateau plateauDeJeu){
+void sauvegarde(Plateau plateauDeJeu, char *save){
 	
 	// récupération de la variable joueur
 	extern int joueur;
@@ -11,7 +11,7 @@ void sauvegarde(Plateau plateauDeJeu){
 	FILE* fichier = NULL;
 	
 	// le pointeur fichier est pointé sur le fichier ".sauvegarde.txt"
-	fichier = fopen(".sauvegarde.txt", "w");
+	fichier = fopen(save, "w");
 
 	// on test si le fichier est bien ouvert
 	if(fichier != NULL)
@@ -54,14 +54,14 @@ void sauvegarde(Plateau plateauDeJeu){
 }
 
 // fonction qui permet de charger une sauvbegarde
-void chargerSauvegarde(Plateau *plateauDeJeu)
+void chargerSauvegarde(Plateau *plateauDeJeu, char *save)
 {
 
 	extern int joueur;
 	FILE* fichier = NULL;
 	int retourALigne;
 
-	fichier = fopen(".sauvegarde.txt", "r");
+	fichier = fopen(save, "r");
 
 if(fichier != NULL)
 {
@@ -104,6 +104,48 @@ if(fichier != NULL)
 	}
 }
 
+
+void ajoutNouvellePartie(char *nouvellePartie){
+
+FILE* fichier = NULL;	
+fichier = fopen(".parties", "a");
+
+if(fichier != NULL)
+{
+	fprintf(fichier, "\n%s", nouvellePartie);
+
+	fclose(fichier);
+}
+else{
+	printf("impossible d'ouvrir le fichier de nouvelle partie");
+}
+
+
+
+}
+
+void recupererPartie(char **parties, int taille)
+{
+
+const int TAILLE_MAX = 20;
+FILE* fichier = NULL;
+fichier = fopen(".parties", "a");
+int i = 0;
+char chaine[20] = "";
+
+if(fichier != NULL)
+{
+	while(fgets(chaine, TAILLE_MAX, fichier) != NULL)
+	{
+		*parties[i] = *chaine;
+		i++;
+	}
+	fclose(fichier);
+}
+else{
+	printf("Le fichier .parties ne s'ouvrent pas");
+}
+}
 
 
 
