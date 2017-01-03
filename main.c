@@ -7,7 +7,7 @@ int main (void){
     int quitterPartie = 0,choix = 0,nbDeJoueurs,partieChoisie;
     Plateau plateauDeJeu;
     Case caseOriginJoueur1,caseOriginJoueur2;
-
+    char *save = ".sauvegarde.txt";
     //Plateau *plateau,Case originJoueur1,Case originJouer2,int joueur1,int joueur2);
 
     do { //Boucle principale du jeu
@@ -49,7 +49,7 @@ int main (void){
 	                joueur = 1;
 	            }
         	}
-            sauvegarde(plateauDeJeu);
+            sauvegarde(plateauDeJeu, save);
             
         }while (quitterPartie != 1);
 
