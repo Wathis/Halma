@@ -4,7 +4,7 @@
 int main (void){
 
     //Déclarations des variables
-    int quitterPartie = 0,quitterMenu = 0,nbDeJoueurs;
+    int quitterPartie = 0,choix = 0,nbDeJoueurs,partieChoisie;
     Plateau plateauDeJeu;
     Case caseOriginJoueur1,caseOriginJoueur2;
 
@@ -15,17 +15,19 @@ int main (void){
         do { //Boucle du menu
             afficherLeMessageDuMenu();
             nbDeJoueurs = 2;
-            scanf("%d", &quitterMenu);
-	    
-        } while (quitterMenu != 1 && quitterMenu != 2);
+            scanf("%d", &choix);
+        } while (choix != 1 && choix != 2);
         
         //Initialisation du jeu
-    	if(quitterMenu == 1)
+    	if(choix == 1)
     	{
             initialisation(&plateauDeJeu,&caseOriginJoueur1,&caseOriginJoueur2,1,2);
     	}
-    	else if(quitterMenu == 2){
-    		chargerSauvegarde(&plateauDeJeu);
+    	else if(choix == 2){
+    		char *parties[10] = {"Partie 1","Partie 2","Partie 3","Partie 4","Partie 5","0"};
+    		afficherLesParties(parties,10);
+            scanf("%d",&partieChoisie);
+    		chargerSauvegarde(&plateauDeJeu,parties[partieChoisie - 1]);
     	}
     	afficherLePlateau(&plateauDeJeu);
         do { //Boucle de la partie en cours

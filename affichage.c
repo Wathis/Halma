@@ -74,8 +74,16 @@ void afficherLeMessageDuMenu(){
     printf("\t  ###############################################################\n\n\n");
     printf("\t\t Rappel ! X = Joueur 1 et O = Joueur 2");
     printf("\n\n\t 1 : Nouvelle partie");
-    printf("\n\t 2 : Charger la partie en cours");
-    printf("\n\nChoix : ");        
+    printf("\n\t 2 : Charger une partie");
+    printf("\n\n\t Choix : ");        
+}
+
+void afficherLesParties(char **parties,int tailleTab){  
+	int i = 0;
+	while(*parties[i] != '0'){ //Le / est la fin de la liste des parties 
+		printf("\t\t %d : %s\n",i + 1,parties[i]);
+		i++;
+	}
 }
 
 //Fonction pour afficher une erreur

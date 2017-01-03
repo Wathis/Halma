@@ -43,22 +43,19 @@ int faireUneSaisie(Case *caseSelectionne,int joueur,int categorieDeSelection){ /
 		    if (strlen(caseSelectionneChar) != 2){
 		    	printf("\t\t   Votre saisie n'est pas correcte");
 		    }
-		    printf("Case séléctionné : %c%c\n",caseSelectionneChar[0],caseSelectionneChar[1]);
 		}while(strlen(caseSelectionneChar) != 2);
 
 		//Si le premier caractere est un nombre 
 		if (caseSelectionneChar[0] >= 48 && caseSelectionneChar[0] <= 57){
-			printf("Le premier est nombre \n");
 			//Si le deuxieme caractere est une lettre
 			if ((caseSelectionneChar[1] >= 65 && caseSelectionneChar[1] <= 74)||(caseSelectionneChar[1] >= 97 && caseSelectionneChar[1] <= 106)){
-				printf("Deuxieme lettre !\n");
+			
 				//Alors on echange pour faire en sorte que l'algorithme ne traite que une lettre puis un chiffre
 				swap = caseSelectionneChar[0];
 				caseSelectionneChar[0] = caseSelectionneChar[1];
 				caseSelectionneChar[1] = swap;
 			}
 		}
-		printf("Case séléctionné changée : %c%c\n",caseSelectionneChar[0],caseSelectionneChar[1]);
 		//Conversion des chars en int 
 		if (caseSelectionneChar[0] >= 97 && caseSelectionneChar[0] <= 106){
 			caseSelectionne->y = caseSelectionneChar[0] - 97; //Moins 97 car le caractere a en ACSII vaut 97
